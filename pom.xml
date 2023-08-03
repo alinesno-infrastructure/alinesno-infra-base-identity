@@ -33,7 +33,10 @@
         <module>alinesno-infra-base-identity-admin</module>
         -->
 
-        <module>alinesno-infra-base-identity-authentication</module>  <!-- 认证服务 -->
+        <!-- 认证UI服务，使用非后端分离服务 
+        <module>alinesno-infra-base-identity-auth-ui</module>  
+        -->
+        <module>alinesno-infra-base-identity-auth</module>  <!-- 认证服务 -->
     </modules>
 
 </project>
