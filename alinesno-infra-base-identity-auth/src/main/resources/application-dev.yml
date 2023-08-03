@@ -9,7 +9,7 @@ spring:
       database: 1
       host: 127.0.0.1
       port: 6379
-      password: 
+      password: admin
       timeout: 10s
       lettuce:
         pool:
@@ -25,6 +25,7 @@ sa-token:
   sso:
     allow-url: "*"
     ticket-timeout: 300
+  is-print: false
   sign:
     secret-key: kQwIOrYvnXmSDkwEiFngrKidMcdrgKor
     
