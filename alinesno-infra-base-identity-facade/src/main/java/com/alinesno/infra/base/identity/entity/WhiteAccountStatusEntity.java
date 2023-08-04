@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * @author luoxiaodong
  * @version 1.0.0
  */
-@TableName("oauth_white_account_status")
+@TableName("white_account_status")
 public class WhiteAccountStatusEntity extends InfraBaseEntity {
 	/**
 	 * 登陆账号

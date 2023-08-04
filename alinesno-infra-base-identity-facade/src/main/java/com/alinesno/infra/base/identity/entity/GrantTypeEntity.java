@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * @author luoxiaondg
  * @version 1.0.0
  */
-@TableName("oauth_grant_type")
+@TableName("grant_type")
 public class GrantTypeEntity extends InfraBaseEntity {
     // fields
     /**

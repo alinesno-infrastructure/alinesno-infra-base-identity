@@ -18,7 +18,7 @@ import java.util.List;
  * @author luoxiaondg
  * @version 1.0.0
  */
-@TableName("oauth_registered_app")
+@TableName("registered_app")
 public class RegisteredAppEntity extends InfraBaseEntity {
     // fields
     /**

@@ -10,9 +10,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * @author luoxiaondg
  * @version 1.0.0
  */
-@TableName("oauth_white_account")
+@TableName("white_account")
 public class WhiteAccountEntity extends InfraBaseEntity {
-	private static final long serialVersionUID = 1L;
 	// fields
 	/**
 	 * 登陆账号

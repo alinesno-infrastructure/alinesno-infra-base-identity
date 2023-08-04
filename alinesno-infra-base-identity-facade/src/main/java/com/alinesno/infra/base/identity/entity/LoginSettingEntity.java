@@ -11,10 +11,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * @author luoxiaondg
  * @version 1.0.0
  */
-@TableName("oauth_login_setting")
+@TableName("login_setting")
 public class LoginSettingEntity extends InfraBaseEntity {
-
-	private static final long serialVersionUID = 1L;
 
 	private String themeCode ; // 品牌代码
 	private int loginStyle; // :'0' , 登陆主题

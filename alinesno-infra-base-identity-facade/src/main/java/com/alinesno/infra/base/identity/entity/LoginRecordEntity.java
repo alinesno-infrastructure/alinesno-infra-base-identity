@@ -17,10 +17,8 @@ import java.util.Date;
  * @version 1.0.0
  */
 
-@TableName("user_login_record")
+@TableName("login_record")
 public class LoginRecordEntity extends InfraBaseEntity {
-
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 登陆名

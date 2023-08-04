@@ -13,10 +13,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * @author luoxiaodong
  * @version 1.0.0
  */
-@TableName("oauth_theme")
+@TableName("enterprise_theme")
 public class EnterpriseThemeEntity extends InfraBaseEntity {
-
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 登录SEO标题
@@ -105,10 +103,6 @@ public class EnterpriseThemeEntity extends InfraBaseEntity {
 
 	public void setHasQrLogin(int hasQrLogin) {
 		this.hasQrLogin = hasQrLogin;
-	}
-
-	public static long getSerialVersionUID() {
-		return serialVersionUID;
 	}
 
 	public String getLoginColor() {

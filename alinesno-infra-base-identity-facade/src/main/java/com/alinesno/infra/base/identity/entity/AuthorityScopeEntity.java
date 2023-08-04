@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * @author luoxiaodong
  * @version 1.0.0
  */
-@TableName("oauth_authority_scope")
+@TableName("authority_scope")
 public class AuthorityScopeEntity extends InfraBaseEntity {
     // fields
     /**
