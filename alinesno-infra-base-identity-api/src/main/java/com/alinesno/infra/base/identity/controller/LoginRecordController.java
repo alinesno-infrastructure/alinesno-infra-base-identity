@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 继承自BaseController类并实现ILoginRecordService接口。
  *
  * @version 1.0.0
- * @Author luoxiaodong
+ * @author luoxiaodong
  */
 @Api(tags = "LoginRecord")
 @RestController
