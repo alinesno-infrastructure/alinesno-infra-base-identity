@@ -12,6 +12,6 @@ import com.alinesno.infra.common.facade.services.IBaseService;
  * @version 1.0.0
  */
 
-public interface IManagerRecordservice extends IBaseService<ManagerRecordEntity> {
+public interface IManagerRecordService extends IBaseService<ManagerRecordEntity> {
 
 }
