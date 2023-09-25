@@ -1,0 +1,20 @@
+server:
+  port: 30106
+
+# spring 配置
+spring:
+  application:
+    name: alinesno-infra-base-identity-boot
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.20.200.162:3306/dev_alinesno_infra_base_identity_v100?serverTimezone=GMT%2B8&zeroDateTimeBehavior=CONVERT_TO_NULL
+    username: root
+    password: capinfo123$%^
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: aip@local
+  devtools:
+    restart:
+      enabled: true
