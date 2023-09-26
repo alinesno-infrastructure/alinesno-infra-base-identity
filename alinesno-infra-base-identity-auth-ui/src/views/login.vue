@@ -394,10 +394,10 @@ function checkHasLogin(){
 
 }
 
-checkHasLogin();
-
-// getCode();
+getCode();
 getCookie();
+
+checkHasLogin();
 
 </script>
 

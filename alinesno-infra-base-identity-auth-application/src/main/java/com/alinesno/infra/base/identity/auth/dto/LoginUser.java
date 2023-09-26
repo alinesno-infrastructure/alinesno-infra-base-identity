@@ -7,6 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
+
+import static java.util.Optional.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -17,26 +21,34 @@ public class LoginUser {
     private String phoneCode ;
     private String username ;
     private String password ;
-    private boolean rememberMe ;
+    private boolean rememberMe = false ;
     private String code ;
     private String uuid ;
 
-    public static LoginUser convertParamListToUser(String paramList) throws JSONException {
+    public static LoginUser convertParamListToUser(String paramList) {
+            JSONArray jsonArray = JSONArray.parseArray(paramList) ;
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
 
-        JSONArray jsonArray = JSONArray.parseArray(paramList) ;
-        JSONObject jsonObject = jsonArray.getJSONObject(0);
+            String loginType = jsonObject.getString("loginType");
+            String phoneNumber = jsonObject.getString("phoneNumber");
+            String phoneCode = jsonObject.getString("phoneCode");
+            String username = jsonObject.getString("username");
+            String password = jsonObject.getString("password");
+            boolean rememberMe = jsonObject.get("rememberMe") != null ? jsonObject.getBoolean("rememberMe"):false;
+            String code = jsonObject.getString("code");
+            String uuid = jsonObject.getString("uuid");
 
-        String username = jsonObject.getString("username");
-        String password = jsonObject.getString("password");
-        String code = jsonObject.getString("code");
+            LoginUser user = new LoginUser();
+            user.setLoginType(loginType);
+            user.setPhoneNumber(phoneNumber);
+            user.setPhoneCode(phoneCode);
+            user.setUsername(username);
+            user.setPassword(password);
+            user.setRememberMe(rememberMe);
+            user.setCode(code);
+            user.setUuid(uuid);
 
-        LoginUser user = new LoginUser();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setCode(code);
-
-        return user;
+            return user;
     }
-
 
 }

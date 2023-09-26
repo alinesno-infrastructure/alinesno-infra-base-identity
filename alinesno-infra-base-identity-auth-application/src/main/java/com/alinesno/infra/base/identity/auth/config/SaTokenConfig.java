@@ -41,12 +41,8 @@ public class SaTokenConfig {
             pwd = loginUser.getPassword() ;
 
             // 此处仅做模拟登录，真实环境应该查询数据进行登录
-//            if("sa".equals(name) && "123456".equals(pwd)) {
-//                StpUtil.login(10001);
-//                return SaResult.ok("登录成功！").setData(StpUtil.getTokenValue());
-//            }
-
-            return SaResult.error("登录失败！");
+            StpUtil.login(10001);
+            return SaResult.ok("登录成功！").setData(StpUtil.getTokenValue());
         });
 
         // 配置 Http 请求处理器 （在模式三的单点注销功能下用到，如不需要可以注释掉）
