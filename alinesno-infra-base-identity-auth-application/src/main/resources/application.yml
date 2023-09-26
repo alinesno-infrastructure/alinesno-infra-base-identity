@@ -27,7 +27,7 @@ sa-token:
     ticket-timeout: 300
   is-print: false
   sign:
-    secret-key:
+    secret-key: kQwIOrYvnXmSDkwEiFngrKidMcdrgKor
 
 forest:
   log-enabled: false

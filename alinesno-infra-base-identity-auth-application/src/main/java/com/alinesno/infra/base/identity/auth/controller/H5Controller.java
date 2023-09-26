@@ -50,7 +50,7 @@ public class H5Controller {
 
 		Map<String , Object> map = new HashMap<>() ;
 		map.put("sso_login" , true);
-		map.put("redirect_url" , "http://www.baidu.com");
+		map.put("redirect_url" , loginDetailsDTO.getRedirect());
 		result.setMap(map) ;
 
 		return result ;
