@@ -1,6 +1,7 @@
 package com.alinesno.infra.base.identity.auth.controller;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ public class H5Controller {
 	/**
 	 * 获取 redirectUrl 
 	 */
-	@RequestMapping("/sso/getRedirectUrl")
+	@GetMapping("/sso/getRedirectUrl")
 	private Object getRedirectUrl(String redirect, String mode, String client) {
 
 		// 未登录情况下，返回 code=401 
