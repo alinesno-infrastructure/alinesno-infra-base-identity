@@ -1,9 +1,9 @@
 server:
   port: 27001
-   
+
 spring:
   application:
-    name: alinesno-infra-base-identity-authentication 
+    name: alinesno-infra-base-identity-authentication
   data:
     redis:
       database: 1
@@ -20,14 +20,14 @@ spring:
   devtools:
     restart:
       enabled: true
-      
+
 sa-token:
   sso:
     allow-url: "*"
     ticket-timeout: 300
   is-print: false
   sign:
-    secret-key: kQwIOrYvnXmSDkwEiFngrKidMcdrgKor
-    
+    secret-key:
+
 forest:
   log-enabled: false
