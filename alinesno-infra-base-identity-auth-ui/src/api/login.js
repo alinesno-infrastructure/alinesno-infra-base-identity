@@ -37,7 +37,7 @@ export function register(data) {
 // 获取用户详细信息
 export function getInfo() {
   return request({
-    url: '/getInfo',
+    url: '/sso/getData',
     method: 'get'
   })
 }
@@ -66,6 +66,10 @@ export function getCodeImg() {
 export function getRedirectUrl(pData){
   return request({
     url: '/sso/getRedirectUrl',
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+			'satoken': localStorage.getItem('satoken')
+    },
     method: 'post',
     data: pData 
   })

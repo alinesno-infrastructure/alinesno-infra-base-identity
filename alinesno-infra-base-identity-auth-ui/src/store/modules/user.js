@@ -1,6 +1,6 @@
 import { login, logout, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import defAva from '@/assets/images/profile.jpg'
+// import defAva from '@/assets/images/profile.jpg'
 
 const useUserStore = defineStore(
   'user',
@@ -15,17 +15,12 @@ const useUserStore = defineStore(
     actions: {
       // 登录
       login(userInfo) {
-
-        const loginType = userInfo.loginType
-        const phoneNumber = userInfo.phoneNumber.trim()
-        const phoneCode = userInfo.phoneCode
         const username = userInfo.username.trim()
         const password = userInfo.password
         const code = userInfo.code
         const uuid = userInfo.uuid
-
         return new Promise((resolve, reject) => {
-          login(username, password, code, uuid , loginType , phoneNumber , phoneCode).then(res => {
+          login(username, password, code, uuid).then(res => {
             setToken(res.token)
             this.token = res.token
             resolve()
@@ -39,7 +34,7 @@ const useUserStore = defineStore(
         return new Promise((resolve, reject) => {
           getInfo().then(res => {
             const user = res.user
-            const avatar = (user.avatar == "" || user.avatar == null) ? defAva : import.meta.env.VITE_APP_BASE_API + user.avatar;
+            // const avatar = (user.avatar == "" || user.avatar == null) ? defAva : import.meta.env.VITE_APP_BASE_API + user.avatar;
 
             if (res.roles && res.roles.length > 0) { // 验证返回的roles是否是一个非空数组
               this.roles = res.roles
@@ -48,7 +43,7 @@ const useUserStore = defineStore(
               this.roles = ['ROLE_DEFAULT']
             }
             this.name = user.userName
-            this.avatar = avatar;
+            // this.avatar = avatar;
             resolve(res)
           }).catch(error => {
             reject(error)

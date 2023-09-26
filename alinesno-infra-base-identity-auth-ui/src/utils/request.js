@@ -3,7 +3,7 @@ import { ElNotification , ElMessageBox, ElMessage, ElLoading } from 'element-plu
 import { getToken } from '@/utils/auth'
 import errorCode from '@/utils/errorCode'
 import { tansParams, blobValidate } from '@/utils/ruoyi'
-import cache from '@/plugins/cache'
+import cache from '@/utils/cache'
 import { saveAs } from 'file-saver'
 import useUserStore from '@/store/modules/user'
 
@@ -88,7 +88,8 @@ service.interceptors.response.use(res => {
       });
     }
       return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
-    } else if (code === 500) {
+    } 
+    else if (code === 500) {
       ElMessage({ message: msg, type: 'error' })
       return Promise.reject(new Error(msg))
     } else if (code === 601) {

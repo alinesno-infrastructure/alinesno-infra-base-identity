@@ -1,7 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router'
 /* Layout */
 //import Layout from '@/layout/SaaSLayout'
-import Layout from '@/layout'
+// import Layout from '@/layout'
 
 /**
  * Note: 路由配置项
@@ -28,13 +28,13 @@ import Layout from '@/layout'
 // 公共路由
 export const constantRoutes = [
   {
-    path: '/login',
-    component: () => import('@/views/login'),
+    path: '/index',
+    component: () => import('@/views/index'),
     hidden: true
   },
   {
-    path: '/register',
-    component: () => import('@/views/register'),
+    path: '/login',
+    component: () => import('@/views/login'),
     hidden: true
   },
   {

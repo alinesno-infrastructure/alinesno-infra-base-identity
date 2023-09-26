@@ -7,6 +7,7 @@ import cn.dev33.satoken.util.SaResult;
 import com.alinesno.infra.base.identity.auth.dto.LoginUser;
 import com.dtflys.forest.Forest;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,11 +38,11 @@ public class SaTokenConfig {
 
             log.debug("loginUser = {}" , loginUser) ;
 
-            name = loginUser.getUsername() ;
-            pwd = loginUser.getPassword() ;
-
             // 此处仅做模拟登录，真实环境应该查询数据进行登录
             StpUtil.login(10001);
+
+            log.debug("isLogin = {}" , StpUtil.isLogin());
+
             return SaResult.ok("登录成功！").setData(StpUtil.getTokenValue());
         });
 

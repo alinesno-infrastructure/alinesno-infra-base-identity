@@ -257,7 +257,7 @@ const loginRules = {
   code: [{ required: true, trigger: "change", message: "请输入验证码" }]
 };
 
-const codeUrl = ref("data:image/gif;base64,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");
+const codeUrl = ref("");
 const loading = ref(false);
 // 验证码开关
 const captchaEnabled = ref(true);
@@ -358,9 +358,11 @@ function getCode() {
 }
 
 function getCookie() {
+
   const username = Cookies.get("username");
   const password = Cookies.get("password");
   const rememberMe = Cookies.get("rememberMe");
+
   loginForm.value = {
     username: username === undefined ? loginForm.value.username : username,
     password: password === undefined ? loginForm.value.password : decrypt(password),
@@ -376,14 +378,14 @@ function checkHasLogin(){
     mode: getParam('mode', '')
   };
 
-  console.log('pData = ' + pData) ;
+  console.log('pData = ' + JSON.stringify(pData)) ;
 
-  getRedirectUrl().then(res => {
+  getRedirectUrl(pData).then(res => {
     console.log('res = ' + res) ;
 
-    if(res.code == 200) {
+    if(res.sso_login) {
       // 已登录，并且redirect地址有效，开始跳转  
-      location.href = decodeURIComponent(res.data);
+      location.href = decodeURIComponent(res.redirect_url);
     } else if(res.code == 401) {
       console.log('未登录');
     } else {
