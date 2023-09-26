@@ -225,14 +225,16 @@
 </template>
 
 <script setup>
-import { getCodeImg , getRedirectUrl } from "@/api/login";
+import { getCodeImg ,login , getRedirectUrl } from "@/api/login";
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from "@/utils/jsencrypt";
 import { getParam } from "@/utils/ruoyi" ;
-import useUserStore from '@/store/modules/user'
+import { setSaToken } from '@/utils/auth'
 
+import useUserStore from '@/store/modules/user'
 const userStore = useUserStore()
 const router = useRouter();
+
 const { proxy } = getCurrentInstance();
 
 // 登陆方式类型
@@ -306,6 +308,7 @@ function handleLogin() {
   proxy.$refs.loginRef.validate(valid => {
     if (valid) {
       loading.value = true;
+
       // 勾选了需要记住密码设置在 cookie 中设置记住用户名和密码
       if (loginForm.value.rememberMe) {
         Cookies.set("username", loginForm.value.username, { expires: 30 });
@@ -323,17 +326,24 @@ function handleLogin() {
         Cookies.remove("phoneNumber");
         Cookies.remove("phoneCode");
       }
-      // 调用action的登录方法
 
-      userStore.login(loginForm.value).then(() => {
-        router.push({ path: redirect.value || "/" });
-      }).catch(() => {
+      // 调用action的登录方法
+      userStore.login(loginForm.value).then((res) => {
+
+        console.log('res = ' + res) ;
+
+        // 登陆成功，则刷新界面
+        checkHasLogin();
+
+      }).catch((err) => {
+        console.log('error = ' + err) ;
         loading.value = false;
         // 重新获取验证码
         if (captchaEnabled.value) {
           getCode();
         }
       });
+
     }
   });
 }
