@@ -11,10 +11,7 @@ import com.dtflys.forest.Forest;
 import com.dtflys.forest.annotation.Get;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -35,8 +32,18 @@ public class ServerController {
 	 * 		http://{host}:{port}/sso/checkTicket	-- Ticket校验接口（isHttp=true时打开），接受参数：ticket=ticket码、ssoLogoutCall=单点注销回调地址 [可选] 
 	 * 		http://{host}:{port}/sso/signout		-- 单点注销地址（isSlo=true时打开），接受参数：loginId=账号id、secretkey=接口调用秘钥 
 	 */
-	@RequestMapping(value = "/sso/*" , method = {RequestMethod.GET, RequestMethod.POST , RequestMethod.PUT , RequestMethod.DELETE})
-	public Object ssoRequest() {
+	@GetMapping("/sso/*")
+	public Object ssoRequestForGet() {
+		return SaSsoProcessor.instance.serverDister();
+	}
+
+	@PostMapping("/sso/*")
+	public Object ssoRequestForPost() {
+		return SaSsoProcessor.instance.serverDister();
+	}
+
+	@PutMapping("/sso/*")
+	public Object ssoRequestForPut() {
 		return SaSsoProcessor.instance.serverDister();
 	}
 
