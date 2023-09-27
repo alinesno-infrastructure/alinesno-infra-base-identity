@@ -17,24 +17,15 @@
     </el-header> 
     <el-main class="main-box" style="">
 
-      <div style="
-    width: 500px;
-    text-align: left;
-    position: absolute;
-    text-align: center;
-    text-align: center;
-    margin: auto;
-    width: calc(100% - 20px);
-    overflow: hidden;
-    margin-top: calc(8% - 90px);
-">
-        <img src="https://pic2.zhimg.com/80/v2-f6b1f64a098b891b4ea1e3104b5b71f6_720w.png" style="
-    width: 100px;
-">
-    </div>
-
       <div class="login-content">
         
+        <div class="marketing-wrapper">
+          <div class="title-header">
+            <span class="main-title">用户一次可通过一组登录凭证登入会话,在该次会话期间无需再次登录</span>
+            <span class="sub-title">可安全访问多个相关的应用和服务</span>
+          </div>
+        </div>
+
         <div class="logo-box">
           <div class="wrapper">
             <div class="qr-method method ">
