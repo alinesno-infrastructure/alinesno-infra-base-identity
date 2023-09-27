@@ -25,6 +25,7 @@ sa-token:
   sso:
     allow-url: "*"
     ticket-timeout: 300
+    is-http: true
   is-print: false
   sign:
     secret-key: kQwIOrYvnXmSDkwEiFngrKidMcdrgKor

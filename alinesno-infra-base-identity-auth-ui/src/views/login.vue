@@ -1,14 +1,16 @@
 <template>
   <el-container class="login-container">
-    <el-header style="z-index: 100;height: 45px;background: #3b5998;">
+    <el-header style="z-index: 100;height: 45px;background: #fff;border-bottom: 1px solid #e5e5e5;">
       <div>
-        <div style="float: left;font-size: 30px;color: rgb(255, 255, 255);margin-top: 5px;">
-          <img src="http://data.linesno.com/logo.png" style="width:35px" alt="">
+        <div style="float: left;font-size: 30px;color:#222 ;margin-top: 5px;">
+          <img src="http://portal.infra.linesno.com/logo.png" style="width:35px" alt="">
         </div>
         <div class="banner-text">
           单点登陆服务
         </div>
-        <a href="http://portal.infra.linesno.com/" target="_blank" lass="banner-text" style="float: right;font-weight: 500;font-size: 13px;margin-top: 14px;color: rgb(255, 255, 255);">
+        <a href="http://portal.infra.linesno.com/" 
+           target="_blank" 
+           class="banner-text" style="float: right;font-weight: 500;font-size: 13px;margin-top: 14px;color:#222;">
           <i class="fas fa-link"></i> 官网
         </a>
       </div>
@@ -331,7 +333,6 @@ function handleLogin() {
       userStore.login(loginForm.value).then((res) => {
 
         console.log('res = ' + res) ;
-
         // 登陆成功，则刷新界面
         checkHasLogin();
 
@@ -394,8 +395,11 @@ function checkHasLogin(){
     console.log('res = ' + res) ;
 
     if(res.sso_login) {
+
+      debugger 
+
       // 已登录，并且redirect地址有效，开始跳转  
-      location.href = decodeURIComponent(res.redirect_url);
+      location.href = decodeURIComponent(res.data);
     } else if(res.code == 401) {
       console.log('未登录');
     } else {

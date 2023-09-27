@@ -32,7 +32,7 @@ public class ServerController {
 	 * 		http://{host}:{port}/sso/checkTicket	-- Ticket校验接口（isHttp=true时打开），接受参数：ticket=ticket码、ssoLogoutCall=单点注销回调地址 [可选] 
 	 * 		http://{host}:{port}/sso/signout		-- 单点注销地址（isSlo=true时打开），接受参数：loginId=账号id、secretkey=接口调用秘钥 
 	 */
-	@GetMapping("/sso/*")
+	@RequestMapping("/sso/*")
 	public Object ssoRequestForGet() {
 		return SaSsoProcessor.instance.serverDister();
 	}
