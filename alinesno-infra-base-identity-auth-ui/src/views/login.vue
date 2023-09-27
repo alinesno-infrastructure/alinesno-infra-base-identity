@@ -1,16 +1,16 @@
 <template>
   <el-container class="login-container">
-    <el-header style="z-index: 100;height: 45px;background: #fff;border-bottom: 1px solid #e5e5e5;">
+    <el-header style="z-index: 100;height: 45px;background: #3b5998;box-shadow:0 2px 4px 0 var(--cb-color-shadow,rgba(0,0,0,0.16)) ;">
       <div>
-        <div style="float: left;font-size: 30px;color:#222 ;margin-top: 5px;">
-          <img src="http://portal.infra.linesno.com/logo.png" style="width:35px" alt="">
+        <div style="float: left;font-size: 30px;color:#fff;margin-top: 5px;">
+          <img :src="homeLogo" style="width:35px" alt="">
         </div>
         <div class="banner-text">
           单点登陆服务
         </div>
         <a href="http://portal.infra.linesno.com/" 
            target="_blank" 
-           class="banner-text" style="float: right;font-weight: 500;font-size: 13px;margin-top: 14px;color:#222;">
+           style="float: right;font-weight: 500;font-size: 13px;margin-top: 14px;color:#fff;">
           <i class="fas fa-link"></i> 官网
         </a>
       </div>
@@ -231,6 +231,7 @@ import { getCodeImg ,login , getRedirectUrl } from "@/api/login";
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from "@/utils/jsencrypt";
 import { getParam } from "@/utils/ruoyi" ;
+import homeLogo from '@/assets/logo/logo.png'
 import { setSaToken } from '@/utils/auth'
 
 import useUserStore from '@/store/modules/user'
