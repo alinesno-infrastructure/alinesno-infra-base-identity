@@ -32,7 +32,7 @@ public class ServerController {
 	 * 		http://{host}:{port}/sso/checkTicket	-- Ticket校验接口（isHttp=true时打开），接受参数：ticket=ticket码、ssoLogoutCall=单点注销回调地址 [可选] 
 	 * 		http://{host}:{port}/sso/signout		-- 单点注销地址（isSlo=true时打开），接受参数：loginId=账号id、secretkey=接口调用秘钥 
 	 */
-	@RequestMapping("/sso/*")
+	@GetMapping("/sso/*")
 	public Object ssoRequestForGet() {
 		return SaSsoProcessor.instance.serverDister();
 	}
@@ -47,6 +47,10 @@ public class ServerController {
 		return SaSsoProcessor.instance.serverDister();
 	}
 
+	@DeleteMapping("/sso/*")
+	public Object ssoRequestForDelete() {
+		return SaSsoProcessor.instance.serverDister();
+	}
 
 	// 示例：获取数据接口（用于在模式三下，为 client 端开放拉取数据的接口）
 	@GetMapping("/sso/getData")
