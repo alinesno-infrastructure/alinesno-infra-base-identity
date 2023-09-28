@@ -22,7 +22,8 @@ spring:
 # sa-token配置
 sa-token:
   token-name: satoken
-  host-path: http://alinesno-infra-base-identity-auth-application.beta.base.infra.linesno.com
+#  host-path: http://alinesno-infra-base-identity-auth-application.beta.base.infra.linesno.com
+  host-path: http://127.0.0.1:27001
   sso:
     auth-url: ${sa-token.host-path}/login
     is-http: true
