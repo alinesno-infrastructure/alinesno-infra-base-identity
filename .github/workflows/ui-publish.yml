@@ -71,7 +71,7 @@ jobs:
           connect_timeout: 30s
           script: |
             export PROJECT_NAME=${{ env.PROJECT_NAME }}
-            export VERSION=${{ env.PRO_VERSION }}.${{ env.BUILD_NUMBER }}
+            export VERSION=${{ env.PRO_VERSION }}.${{ env.BUILD_NUMBER }}.${{ steps.date.outputs.date }}
 
             export ALIYUN_CR_REGISTORY=${{ env.ALIYUN_CR_REGISTORY }}
             export ALIYUN_CR_NAMESPACE=${{ env.ALIYUN_CR_NAMESPACE }}
