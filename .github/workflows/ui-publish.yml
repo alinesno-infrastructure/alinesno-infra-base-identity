@@ -46,8 +46,8 @@ jobs:
         run: |
           cd ${{ env.PROJECT_NAME }}
           cp -r dist ./docker/
-          docker build -t ${{ env.ALIYUN_CR_REGISTORY }}/${{ env.ALIYUN_CR_NAMESPACE }}/${{ env.PROJECT_NAME }}:${{ env.PRO_VERSION }}.${{ env.BUILD_NUMBER }} ./docker
-          docker push ${{ env.ALIYUN_CR_REGISTORY }}/${{ env.ALIYUN_CR_NAMESPACE }}/${{ env.PROJECT_NAME }}:${{ env.PRO_VERSION }}.${{ env.BUILD_NUMBER }}
+          docker build -t ${{ env.ALIYUN_CR_REGISTORY }}/${{ env.ALIYUN_CR_NAMESPACE }}/${{ env.PROJECT_NAME }}:${{ env.PRO_VERSION }}.${{ env.BUILD_NUMBER }}.${{ steps.date.outputs.date }} ./docker
+          docker push ${{ env.ALIYUN_CR_REGISTORY }}/${{ env.ALIYUN_CR_NAMESPACE }}/${{ env.PROJECT_NAME }}:${{ env.PRO_VERSION }}.${{ env.BUILD_NUMBER }}.${{ steps.date.outputs.date }}
 
       - name: local remote scp
         uses: cross-the-world/scp-pipeline@master
