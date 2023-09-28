@@ -13,20 +13,14 @@
 	<artifactId>alinesno-infra-base-identity-boot</artifactId>
 	<packaging>jar</packaging>
 
-	<properties>
-		<kaptcha.version>2.3.3</kaptcha.version>
-	</properties>
-
 	<dependencies>
 
-		<!-- 验证码 -->
-		<dependency>
-			<groupId>pro.fessional</groupId>
-			<artifactId>kaptcha</artifactId>
-			<version>${kaptcha.version}</version>
-		</dependency>
-
         <!-- 引用服务 -->
+		<dependency>
+			<groupId>com.alinesno.infra.common</groupId>
+			<artifactId>alinesno-infra-common-web-api-sso</artifactId>
+			<version>${revision}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.alinesno.infra.base</groupId>
 			<artifactId>alinesno-infra-base-identity-domain</artifactId>
