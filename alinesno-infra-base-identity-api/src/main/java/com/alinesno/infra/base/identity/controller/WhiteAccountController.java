@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "WhiteAccount")
 @RestController
 @Scope(SpringInstanceScope.PROTOTYPE)
-@RequestMapping("/api/infra/simple/crm/white_account")
+@RequestMapping("/api/infra/base/identity/white_account")
 public class WhiteAccountController extends BaseController<WhiteAccountEntity, IWhiteAccountService> {
 
     // 日志记录

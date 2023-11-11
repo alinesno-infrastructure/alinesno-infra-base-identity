@@ -14,10 +14,6 @@
                 <span><i class="el-icon-monitor"></i>
                   {{ currentEnvClusterObj.clusterName }}
                 </span>
-                <span>
-                  <i class="el-icon-link"></i> 
-                  应用地址: {{ currentEnvClusterObj.apiServerUrl }}
-                </span>
               </div>
             </div>
             <div class="title-desc">
@@ -32,7 +28,7 @@
     <OperationWorkspaceCountStaitcs />
 
     <!-- 应用套件和状态 -->
-    <OperationWorkspaceService />
+    <!-- <OperationWorkspaceService /> -->
 
     <!-- 运行应用列表 -->
     <OperationWorkspaceApps />

@@ -1,13 +1,16 @@
 package com.alinesno.infra.base.identity.controller;
 
-import com.alinesno.infra.base.identity.entity.RegisteredAppEntity;
-import com.alinesno.infra.base.identity.service.IRegisteredAppService;
+import com.alinesno.infra.base.identity.entity.ApplicationEntity;
+import com.alinesno.infra.base.identity.entity.GrantTypeEntity;
+import com.alinesno.infra.base.identity.service.IApplicationService;
+import com.alinesno.infra.base.identity.service.IGrantTypeService;
 import com.alinesno.infra.common.core.constants.SpringInstanceScope;
 import com.alinesno.infra.common.facade.pageable.DatatablesPageBean;
 import com.alinesno.infra.common.facade.pageable.TableDataInfo;
 import com.alinesno.infra.common.web.adapter.rest.BaseController;
 import io.swagger.annotations.Api;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,26 +23,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 处理与RegisteredAppEntity相关的请求的Controller。
- * 继承自BaseController类并实现IRegisteredAppService接口。
+ * 处理与GrantTypeEntity相关的请求的Controller。
+ * 继承自BaseController类并实现IGrantTypeService接口。
  *
  * @version 1.0.0
  * @author luoxiaodong
  */
-@Api(tags = "RegisteredApp")
+@Api(tags = "GrantType")
+@Slf4j
 @RestController
 @Scope(SpringInstanceScope.PROTOTYPE)
-@RequestMapping("/api/infra/base/identity/registered_app")
-public class RegisteredAppController extends BaseController<RegisteredAppEntity, IRegisteredAppService> {
-
-    // 日志记录
-    private static final Logger log = LoggerFactory.getLogger(RegisteredAppController.class);
+@RequestMapping("/api/infra/base/identity/application")
+public class ApplicationController extends BaseController<ApplicationEntity , IApplicationService> {
 
     @Autowired
-    private IRegisteredAppService service;
+    private IApplicationService service;
 
     /**
-     * 获取RegisteredAppEntity的DataTables数据。
+     * 获取GrantTypeEntity的DataTables数据。
      *
      * @param request HttpServletRequest对象。
      * @param model Model对象。
@@ -54,7 +55,7 @@ public class RegisteredAppController extends BaseController<RegisteredAppEntity,
     }
 
     @Override
-    public IRegisteredAppService getFeign() {
+    public IApplicationService getFeign() {
         return this.service;
     }
 }

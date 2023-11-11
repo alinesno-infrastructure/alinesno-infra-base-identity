@@ -7,6 +7,7 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.alinesno.infra.common.facade.mapper.entity.InfraBaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>
@@ -16,6 +17,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * @author luoxiaodong
  * @version 1.0.0
  */
+@EqualsAndHashCode(callSuper = true)
 @TableName("enterprise_theme")
 @Data
 public class EnterpriseThemeEntity extends InfraBaseEntity {

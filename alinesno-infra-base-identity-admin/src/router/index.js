@@ -59,19 +59,6 @@ export const constantRoutes = [
         name: '/index',
         meta: { title: '首页', icon: 'dashboard', affix: true }
       },
-
-      // {
-      //   path: '/dashboard/smartService',
-      //   component: () => import('@/views/smartService'),
-      //   name: '/dashboard/smartService',
-      //   meta: { title: '智能客服', icon: 'dashboard', affix: true }
-      // },
-      // {
-      //   path: '/dashboard/serviceList',
-      //   component: () => import('@/views/serviceList'),
-      //   name: '/dashboard/serviceList',
-      //   meta: { title: '服务列表', icon: 'dashboard', affix: true }
-      // },
       {
         path: '/dashboard/suportTechnique',
         component: () => import('@/views/suportTechnique'),
@@ -85,57 +72,44 @@ export const constantRoutes = [
         meta: { title: '学习手册', icon: 'dashboard', affix: true }
       },
 
-      // ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      // >>>>>>>>>>>>>> identity_router_start >>>>>>>>>>>>>>>>>>>>>
       {
-        path: '/createGateway',
-        name: 'createGateway',
-        hidden: true,
-        component: () => import('@/views/gateway/createGateway'),
-        meta: { title: '创建网关服务', icon: 'dashboard', affix: true }
-      },
+        path: '/base/identity/application/index',
+        component: () => import('@/views/base/identity/application/index'),
+        name: '/base/identity/application/index',
+        meta: { title: '应用管理', icon: 'dashboard', affix: true }
+      }, 
       {
-        path: '/gatewayTopology',
-        name: 'gatewayTopology',
-        hidden: true,
-        component: () => import('@/views/gateway/gatewayTopology'),
-        meta: { title: '网关路由拓扑结构', icon: 'dashboard', affix: true }
-      },
+        path: '/base/identity/online/index',
+        component: () => import('@/views/base/identity/online/index'),
+        name: '/base/identity/online/index',
+        meta: { title: '在线用户', icon: 'dashboard', affix: true }
+      }, 
       {
-        path: '/createClient',
-        name: 'createClient',
-        hidden: true,
-        component: () => import('@/views/gateway/createClient'),
-        meta: { title: '创建客户端', icon: 'dashboard', affix: true }
-      },
+        path: '/base/identity/account/index',
+        component: () => import('@/views/base/identity/account/index'),
+        name: '/base/identity/account/index',
+        meta: { title: '账户管理', icon: 'dashboard', affix: true }
+      }, 
       {
-        path: '/addGatewayClient',
-        name: 'addGatewayClient',
-        hidden: true,
-        component: () => import('@/views/gateway/addGatewayClient'),
-        meta: { title: '添加网关客户端', icon: 'dashboard', affix: true }
-      },
+        path: '/base/identity/config/index',
+        component: () => import('@/views/base/identity/config/index'),
+        name: '/base/identity/config/index',
+        meta: { title: '认证配置', icon: 'dashboard', affix: true }
+      }, 
       {
-        path: '/addClientGateway',
-        name: 'addClientGateway',
-        hidden: true,
-        component: () => import('@/views/gateway/addClientGateway'),
-        meta: { title: '添加客户端网关', icon: 'dashboard', affix: true }
-      },
+        path: '/base/identity/security/index',
+        component: () => import('@/views/base/identity/security/index'),
+        name: '/base/identity/security/index',
+        meta: { title: '企业配置', icon: 'dashboard', affix: true }
+      }, 
       {
-        path: '/addGroovyScript',
-        name: 'addGroovyScript',
-        hidden: true,
-        component: () => import('@/views/gateway/addGroovyScript'),
-        meta: { title: '添加规则组件', icon: 'dashboard', affix: true }
-      },
-      {
-        path: '/createBalanced',
-        name: 'createBalanced',
-        hidden: true,
-        component: () => import('@/views/gateway/createBalanced'),
-        meta: { title: '创建负载均衡', icon: 'dashboard', affix: true }
-      },
-
+        path: '/base/identity/record/index',
+        component: () => import('@/views/base/identity/record/index'),
+        name: '/base/identity/record/index',
+        meta: { title: '日志记录', icon: 'dashboard', affix: true }
+      }, 
+      // >>>>>>>>>>>>>> identity_router_end   >>>>>>>>>>>>>>>>>>>>>
 
     ]
   },
