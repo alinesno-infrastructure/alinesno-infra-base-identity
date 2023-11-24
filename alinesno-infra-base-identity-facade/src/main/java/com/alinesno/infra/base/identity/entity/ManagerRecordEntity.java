@@ -7,6 +7,7 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.alinesno.infra.common.facade.mapper.entity.InfraBaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Basic;
 import javax.persistence.FetchType;
@@ -19,6 +20,7 @@ import java.util.Date;
  * @author luoxiaondg
  * @version 1.0.0
  */
+@EqualsAndHashCode(callSuper = true)
 @TableName("manager_record")
 @Data
 public class ManagerRecordEntity extends InfraBaseEntity {

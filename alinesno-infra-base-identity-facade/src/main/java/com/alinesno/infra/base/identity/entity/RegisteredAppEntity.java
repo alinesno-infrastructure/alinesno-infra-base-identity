@@ -1,16 +1,14 @@
 package com.alinesno.infra.base.identity.entity;
 
-import com.gitee.sunchenbin.mybatis.actable.annotation.ColumnComment;
-import com.gitee.sunchenbin.mybatis.actable.annotation.ColumnType;
-import lombok.Data;
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.alinesno.infra.common.facade.mapper.entity.InfraBaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import org.apache.commons.lang.StringUtils;
+import com.gitee.sunchenbin.mybatis.actable.annotation.ColumnComment;
+import com.gitee.sunchenbin.mybatis.actable.annotation.ColumnType;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,6 +19,7 @@ import java.util.List;
  * @author luoxiaondg
  * @version 1.0.0
  */
+@EqualsAndHashCode(callSuper = true)
 @TableName("registered_app")
 @Data
 public class RegisteredAppEntity extends InfraBaseEntity {

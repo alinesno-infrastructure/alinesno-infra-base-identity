@@ -6,6 +6,7 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.ColumnType;
 import lombok.Data;
 import com.alinesno.infra.common.facade.mapper.entity.InfraBaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>
@@ -15,6 +16,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * @author luoxiaondg
  * @version 1.0.0
  */
+@EqualsAndHashCode(callSuper = true)
 @TableName("login_setting")
 @Data
 public class LoginSettingEntity extends InfraBaseEntity {

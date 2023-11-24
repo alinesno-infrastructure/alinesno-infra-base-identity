@@ -4,10 +4,10 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.ColumnComment;
 import com.gitee.sunchenbin.mybatis.actable.annotation.ColumnType;
 import lombok.Data;
 import cn.afterturn.easypoi.excel.annotation.Excel;
-import com.alibaba.fastjson.annotation.JSONField;
 import com.alinesno.infra.common.facade.mapper.entity.InfraBaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -20,6 +20,7 @@ import java.util.Date;
  * @version 1.0.0
  */
 
+@EqualsAndHashCode(callSuper = true)
 @TableName("login_record")
 @Data
 public class LoginRecordEntity extends InfraBaseEntity {
@@ -38,7 +39,6 @@ public class LoginRecordEntity extends InfraBaseEntity {
 	 */
 	@Excel(name = "登陆时间", format = "yyyy-MM-dd HH:mm:ss")
 	@TableField("login_time")
-	@JSONField(format = "yyyy-MM-dd")
 	@ColumnType(length=19)
 	@ColumnComment("登陆时间")
 	private Date loginTime;
@@ -95,7 +95,6 @@ public class LoginRecordEntity extends InfraBaseEntity {
 	 */
 	@Excel(name = "退出时间", format = "yyyy-MM-dd HH:mm:ss")
 	@TableField("sign_out_time")
-	@JSONField(format = "yyyy-MM-dd")
 	@ColumnType(length=8)
 	@ColumnComment("退出时间")
 	private Date signOutTime;
