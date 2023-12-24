@@ -44,12 +44,8 @@ spec:
                 -Dspring.datasource.url=jdbc:mysql://${DB_MYSQL_URL}/dev_alinesno_infra_base_identity_v100?serverTimezone=GMT%2B8&zeroDateTimeBehavior=CONVERT_TO_NULL
                 -Dspring.datasource.username=${DB_MYSQL_USRENAME}
                 -Dspring.datasource.password=${DB_MYSQL_PASSWORD}
-                -Dserver.port=8080
-<<<<<<< HEAD
-
-                -Dalinesno.infra.gateway.host=${INFRA_GATEWAY_PROXY}
-=======
->>>>>>> 43b05c79e94b3cd7c94301179a12fed265cba633
+                -Dserver.port=8080 
+                -Dalinesno.infra.gateway.host=${INFRA_GATEWAY_PROXY} 
           ports:
             - name: http
               containerPort: 8080
