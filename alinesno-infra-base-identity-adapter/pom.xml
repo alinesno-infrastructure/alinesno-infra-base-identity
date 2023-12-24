@@ -22,6 +22,7 @@
 			<version>${revision}</version>
 		</dependency>
 
+<<<<<<< HEAD
 		<!-- 集成forest -->
 		<dependency>
 			<groupId>com.dtflys.forest</groupId>
@@ -36,6 +37,8 @@
 			<version>${revision}</version>
 		</dependency>
 
+=======
+>>>>>>> 43b05c79e94b3cd7c94301179a12fed265cba633
 	</dependencies>
 
 </project>

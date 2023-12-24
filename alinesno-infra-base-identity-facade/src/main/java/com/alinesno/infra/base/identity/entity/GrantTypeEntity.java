@@ -1,9 +1,13 @@
 package com.alinesno.infra.base.identity.entity;
 
+import com.gitee.sunchenbin.mybatis.actable.annotation.ColumnComment;
+import com.gitee.sunchenbin.mybatis.actable.annotation.ColumnType;
+import lombok.Data;
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.alinesno.infra.common.facade.mapper.entity.InfraBaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.EqualsAndHashCode;
 
 /**
  * 功能名： 【请填写功能名称】
@@ -13,7 +17,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * @author luoxiaondg
  * @version 1.0.0
  */
+@EqualsAndHashCode(callSuper = true)
 @TableName("grant_type")
+@Data
 public class GrantTypeEntity extends InfraBaseEntity {
     // fields
     /**
@@ -21,30 +27,15 @@ public class GrantTypeEntity extends InfraBaseEntity {
      */
     @Excel(name = "授权类型名称")
     @TableField("grant_type_name")
+    @ColumnType(length=50)
+    @ColumnComment("授权类型名称")
     private String grantTypeName;
     /**
      * 授权类型标识
      */
     @Excel(name = "授权类型标识")
     @TableField("grant_type_key")
+    @ColumnType(length=50)
+    @ColumnComment("授权类型标识")
     private String grantTypeKey;
-
-    //getter and setter
-    public String getGrantTypeName() {
-        return this.grantTypeName;
-    }
-
-    public GrantTypeEntity setGrantTypeName(String arg) {
-        this.grantTypeName = arg;
-        return this;
-    }
-
-    public String getGrantTypeKey() {
-        return this.grantTypeKey;
-    }
-
-    public GrantTypeEntity setGrantTypeKey(String arg) {
-        this.grantTypeKey = arg;
-        return this;
-    }
 }
