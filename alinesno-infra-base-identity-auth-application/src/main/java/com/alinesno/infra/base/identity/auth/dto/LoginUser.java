@@ -1,15 +1,10 @@
 package com.alinesno.infra.base.identity.auth.dto;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Optional;
-
-import static java.util.Optional.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,8 +37,15 @@ public class LoginUser {
             user.setLoginType(loginType);
             user.setPhoneNumber(phoneNumber);
             user.setPhoneCode(phoneCode);
-            user.setUsername(username);
-            user.setPassword(password);
+
+            if(loginType.equals("sms")){
+                user.setUsername(phoneNumber);
+                user.setPassword(phoneCode);
+            }else{
+                user.setUsername(username);
+                user.setPassword(password);
+            }
+
             user.setRememberMe(rememberMe);
             user.setCode(code);
             user.setUuid(uuid);

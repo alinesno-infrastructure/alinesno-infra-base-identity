@@ -33,7 +33,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.alinesno.infra.base</groupId>
-			<artifactId>alinesno-infra-base-identity-api</artifactId>
+			<artifactId>alinesno-infra-base-identity-gateway</artifactId>
 			<version>${revision}</version>
 		</dependency>
 

@@ -4,10 +4,12 @@ import cn.dev33.satoken.config.SaSsoConfig;
 import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
+import com.alinesno.infra.base.authority.gateway.dto.ManagerAccountDto;
+import com.alinesno.infra.base.identity.adapter.AccountConsumer;
+import com.alinesno.infra.base.identity.adapter.dto.LoginParamDto;
 import com.alinesno.infra.base.identity.auth.dto.LoginUser;
 import com.dtflys.forest.Forest;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +19,9 @@ import java.util.List;
 @Component
 @Slf4j
 public class SaTokenConfig {
+
+    @Autowired
+    private AccountConsumer accountConsumer ;
 
     // 配置SSO相关参数
     @Autowired
@@ -31,6 +36,8 @@ public class SaTokenConfig {
         // 配置：登录处理函数
         sso.setDoLoginHandle((name, pwd) -> {
 
+            log.debug("name = {} , pwd = {}" , name , pwd);
+
             List<String> paramNames = SaHolder.getRequest().getParamNames() ;
             log.debug("paramNames = {}" , paramNames);
 
@@ -38,8 +45,16 @@ public class SaTokenConfig {
 
             log.debug("loginUser = {}" , loginUser) ;
 
+            LoginParamDto dto = new LoginParamDto() ;
+
+            dto.setUsername(loginUser.getUsername());
+            dto.setPassword(loginUser.getPassword());
+
+            ManagerAccountDto accountDto = accountConsumer.loginAccount(dto) ;
+            log.debug("accountDto = {}" , accountDto);
+
             // 此处仅做模拟登录，真实环境应该查询数据进行登录
-            StpUtil.login(10001);
+            StpUtil.login(accountDto.getId());
 
             log.debug("isLogin = {}" , StpUtil.isLogin());
 

@@ -47,6 +47,8 @@ spec:
                 -Dalinesno.infra.smart.brain.openapi.host=${CHATGPT_PROXY}
                 -Dalinesno.infra.smart.brain.openapi.key=${CHATGPT_SK}
                 -Dserver.port=8080
+
+                -Dalinesno.infra.gateway.host=${INFRA_GATEWAY_PROXY}
           ports:
             - name: http
               containerPort: 8080

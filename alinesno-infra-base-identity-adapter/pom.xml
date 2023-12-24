@@ -22,6 +22,20 @@
 			<version>${revision}</version>
 		</dependency>
 
+		<!-- 集成forest -->
+		<dependency>
+			<groupId>com.dtflys.forest</groupId>
+			<artifactId>forest-spring-boot3-starter</artifactId>
+			<version>${forest.version}</version>
+		</dependency>
+
+		<!-- 引入facade -->
+		<dependency>
+			<groupId>com.alinesno.infra.base</groupId>
+			<artifactId>alinesno-infra-base-authority-facade</artifactId>
+			<version>${revision}</version>
+		</dependency>
+
 	</dependencies>
 
 </project>

@@ -25,12 +25,12 @@
         <module>alinesno-infra-base-identity-facade</module>  <!-- 接口和引用 -->
         <module>alinesno-infra-base-identity-domain</module>  <!-- 领域服务 -->
         <module>alinesno-infra-base-identity-adapter</module> <!-- 适配层 -->
-        <module>alinesno-infra-base-identity-api</module>  <!-- 接口服务 -->
+        <module>alinesno-infra-base-identity-gateway</module>  <!-- 接口服务 -->
         <module>alinesno-infra-base-identity-client</module>  <!-- 对外引用 -->
         <module>alinesno-infra-base-identity-boot</module>  <!-- 启动服务 -->
 
         <!-- 前端服务
-        <module>alinesno-infra-base-identity-admin</module>
+        <module>alinesno-infra-base-identity-ui</module>
         -->
 
         <!-- 认证UI服务，使用非后端分离服务 -->

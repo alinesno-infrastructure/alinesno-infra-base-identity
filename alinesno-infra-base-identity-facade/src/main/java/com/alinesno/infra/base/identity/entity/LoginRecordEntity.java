@@ -1,10 +1,11 @@
 package com.alinesno.infra.base.identity.entity;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
-import com.alibaba.fastjson.annotation.JSONField;
 import com.alinesno.infra.common.facade.mapper.entity.InfraBaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -16,7 +17,8 @@ import java.util.Date;
  * @author luoxiaondg
  * @version 1.0.0
  */
-
+@EqualsAndHashCode(callSuper = true)
+@Data
 @TableName("login_record")
 public class LoginRecordEntity extends InfraBaseEntity {
 
@@ -32,7 +34,6 @@ public class LoginRecordEntity extends InfraBaseEntity {
 	 */
 	@Excel(name = "登陆时间", format = "yyyy-MM-dd HH:mm:ss")
 	@TableField("login_time")
-	@JSONField(format = "yyyy-MM-dd")
 	private Date loginTime;
 	/**
 	 * 登陆IP
@@ -75,7 +76,6 @@ public class LoginRecordEntity extends InfraBaseEntity {
 	 */
 	@Excel(name = "退出时间", format = "yyyy-MM-dd HH:mm:ss")
 	@TableField("sign_out_time")
-	@JSONField(format = "yyyy-MM-dd")
 	private Date signOutTime;
 	/**
 	 * 浏览器信息
@@ -106,140 +106,4 @@ public class LoginRecordEntity extends InfraBaseEntity {
 	
 	@TableField("tentant_domain")
 	private String tentantDomain ; // 租户域名
-
-	public String getIpInfo() {
-		return ipInfo;
-	}
-
-	public void setIpInfo(String ipInfo) {
-		this.ipInfo = ipInfo;
-	}
-
-	public String getLogType() {
-		return logType;
-	}
-
-	public void setLogType(String logType) {
-		this.logType = logType;
-	}
-
-	public String getClientType() {
-		return clientType;
-	}
-
-	public void setClientType(String clientType) {
-		this.clientType = clientType;
-	}
-
-	public String getBrowerType() {
-		return browerType;
-	}
-
-	public void setBrowerType(String browerType) {
-		this.browerType = browerType;
-	}
-
-	public String getTentantDomain() {
-		return tentantDomain;
-	}
-
-	public void setTentantDomain(String tentantDomain) {
-		this.tentantDomain = tentantDomain;
-	}
-
-	public String getLoginName() {
-		return loginName;
-	}
-
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
-	}
-
-	public Date getLoginTime() {
-		return loginTime;
-	}
-
-	public void setLoginTime(Date loginTime) {
-		this.loginTime = loginTime;
-	}
-
-	public String getLoginIp() {
-		return loginIp;
-	}
-
-	public void setLoginIp(String loginIp) {
-		this.loginIp = loginIp;
-	}
-
-	public String getLoginStatus() {
-		return loginStatus;
-	}
-
-	public void setLoginStatus(String loginStatus) {
-		this.loginStatus = loginStatus;
-	}
-
-	public String getErrorPassword() {
-		return errorPassword;
-	}
-
-	public void setErrorPassword(String errorPassword) {
-		this.errorPassword = errorPassword;
-	}
-
-	public String getPhoneCode() {
-		return phoneCode;
-	}
-
-	public void setPhoneCode(String phoneCode) {
-		this.phoneCode = phoneCode;
-	}
-
-	public String getEmailCode() {
-		return emailCode;
-	}
-
-	public void setEmailCode(String emailCode) {
-		this.emailCode = emailCode;
-	}
-
-	public String getLoginSrc() {
-		return loginSrc;
-	}
-
-	public void setLoginSrc(String loginSrc) {
-		this.loginSrc = loginSrc;
-	}
-
-	public Date getSignOutTime() {
-		return signOutTime;
-	}
-
-	public void setSignOutTime(Date signOutTime) {
-		this.signOutTime = signOutTime;
-	}
-
-	public String getLoginBrowser() {
-		return loginBrowser;
-	}
-
-	public void setLoginBrowser(String loginBrowser) {
-		this.loginBrowser = loginBrowser;
-	}
-
-	public String getLoginRemark() {
-		return loginRemark;
-	}
-
-	public void setLoginRemark(String loginRemark) {
-		this.loginRemark = loginRemark;
-	}
-
-	@Override
-	public String toString() {
-		return "ManagerLoginRecordEntity{" + "loginName=" + loginName + ", loginTime=" + loginTime + ", loginIp="
-				+ loginIp + ", loginStatus=" + loginStatus + ", errorPassword=" + errorPassword + ", phoneCode="
-				+ phoneCode + ", emailCode=" + emailCode + ", loginSrc=" + loginSrc + ", signOutTime=" + signOutTime
-				+ ", loginBrowser=" + loginBrowser + ", loginRemark=" + loginRemark + "}";
-	}
 }

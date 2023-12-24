@@ -23,10 +23,16 @@
 			<version>${kaptcha.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>2.0.43</version>
+		</dependency>
+
 		<!-- 引用服务 -->
 		<dependency>
 			<groupId>com.alinesno.infra.base</groupId>
-			<artifactId>alinesno-infra-base-identity-api</artifactId>
+			<artifactId>alinesno-infra-base-identity-gateway</artifactId>
 			<version>${revision}</version>
 		</dependency>
 
@@ -39,6 +45,11 @@
 		<dependency>
 			<groupId>com.alinesno.infra.base</groupId>
 			<artifactId>alinesno-infra-base-identity-auth-ui</artifactId>
+			<version>${revision}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alinesno.infra.base</groupId>
+			<artifactId>alinesno-infra-base-identity-adapter</artifactId>
 			<version>${revision}</version>
 		</dependency>
 		<!-- 公共组件包 _end -->
