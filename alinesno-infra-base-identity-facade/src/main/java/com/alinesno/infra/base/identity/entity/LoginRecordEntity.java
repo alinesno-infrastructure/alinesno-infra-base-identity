@@ -141,4 +141,33 @@ public class LoginRecordEntity extends InfraBaseEntity {
 	@ColumnType(length=255)
 	@ColumnComment("tentantDomain")
 	private String tentantDomain ; // 租户域名
+
+	@TableField
+	private String userId; // 用户id
+
+	@TableField
+	private String nickname; // 账号昵称
+
+	@TableField
+	private String avatar; // 头像
+
+	@TableField
+	private String token; // 本次登录Token
+
+	@TableField
+	private String loginLocation; // 登录地
+
+	@TableField
+	private String clientInfo; // 登录客户端
+
+	@TableField
+	private String systemInfo; // 所属系统
+
+	@TableField
+	private String appInfo; // 所属应用
+
+	@TableField
+	private String authUrl; // 授权地址
+
+
 }

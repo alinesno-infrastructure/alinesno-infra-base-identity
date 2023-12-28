@@ -24,7 +24,6 @@ import java.util.Date;
 @TableName("manager_record")
 @Data
 public class ManagerRecordEntity extends InfraBaseEntity {
-
     /* @Excel(name = "操作说明") */
     @TableField
     @ColumnType(length=50)

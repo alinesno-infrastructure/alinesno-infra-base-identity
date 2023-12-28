@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "GrantType")
 @RestController
 @Scope(SpringInstanceScope.PROTOTYPE)
-@RequestMapping("/api/infra/simple/crm/grant_type")
+@RequestMapping("/api/infra/base/identity/grant_type")
 public class GrantTypeController extends BaseController<GrantTypeEntity, IGrantTypeService> {
 
     // 日志记录

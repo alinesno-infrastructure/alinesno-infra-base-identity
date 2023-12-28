@@ -19,8 +19,6 @@ spring:
     restart:
       enabled: true
 
-<<<<<<< HEAD
-=======
 actable:
   table:
     auto: update
@@ -33,7 +31,6 @@ actable:
   unique:
     prefix: alinesno_base_identity_uni_
 
->>>>>>> 43b05c79e94b3cd7c94301179a12fed265cba633
 # sa-token配置
 sa-token:
   token-name: satoken
@@ -45,8 +42,4 @@ sa-token:
     slo-url: ${sa-token.host-path}/sso/signout
     get-data-url: ${sa-token.host-path}/sso/getData
   sign:
-<<<<<<< HEAD
     secret-key:
-=======
-    secret-key:
->>>>>>> 43b05c79e94b3cd7c94301179a12fed265cba633

@@ -11,7 +11,7 @@
 export default {
   data () {
     return {
-      currentApplicationName: '网关配置服务'
+      currentApplicationName: '单点登陆服务'
     }
   },
   mounted () {

@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "RegisteredApp")
 @RestController
 @Scope(SpringInstanceScope.PROTOTYPE)
-@RequestMapping("/api/infra/simple/crm/registered_app")
+@RequestMapping("/api/infra/base/identity/registeredApp")
 public class RegisteredAppController extends BaseController<RegisteredAppEntity, IRegisteredAppService> {
 
     // 日志记录

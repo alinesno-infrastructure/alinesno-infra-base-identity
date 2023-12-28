@@ -14,11 +14,7 @@
     "@element-plus/icons-vue": "2.0.10",
     "@vueup/vue-quill": "1.1.0",
     "@vueuse/core": "9.5.0",
-<<<<<<< HEAD
     "axios": "0.27.2",
-=======
-    "axios": "1.6.0",
->>>>>>> 43b05c79e94b3cd7c94301179a12fed265cba633
     "element-plus": "2.2.27",
     "file-saver": "2.0.5",
     "fuse.js": "6.6.2",
