@@ -8,10 +8,12 @@ import com.google.gson.JsonObject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 import java.util.Objects;
 
+@Slf4j
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -30,22 +32,17 @@ public class LoginUser {
 
     public static LoginUser convertParamListToUser(SaRequest request) {
 
-        // 将 JSON 字符串解析为 JsonArray
-        String jsonString = request.getParamNames().toString() ;
-        JsonArray jsonArray = gson.fromJson(jsonString, JsonArray.class);
-
-        // 假设 JSON 字符串中只有一个对象
-        JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+        log.debug("loginType = {}" , request.getParam("loginType")) ;
 
         // 获取参数值
-        String loginType = getStringOrNull(jsonObject, "loginType");
-        String phoneNumber = getStringOrNull(jsonObject, "phoneNumber");
-        String phoneCode = getStringOrNull(jsonObject, "phoneCode");
-        String username = getStringOrNull(jsonObject, "username");
-        String password = getStringOrNull(jsonObject, "password");
-        String code = getStringOrNull(jsonObject, "code");
-        boolean rememberMe = getBooleanOrNull(jsonObject, "rememberMe");
-        String uuid = getStringOrNull(jsonObject, "uuid");
+        String loginType = request.getParam("loginType");
+        String phoneNumber = request.getParam("phoneNumber");
+        String phoneCode = request.getParam("phoneCode");
+        String username = request.getParam("username");
+        String password = request.getParam("password");
+        String code = request.getParam("code");
+        boolean rememberMe = Boolean.parseBoolean(request.getParam("rememberMe"));
+        String uuid = request.getParam("uuid");
 
         // 输出参数值
         System.out.println("loginType: " + loginType);
@@ -76,15 +73,4 @@ public class LoginUser {
         return user;
     }
 
-    // 辅助方法用于获取字符串值或返回 null（如果不存在或为 null）
-    private static String getStringOrNull(JsonObject jsonObject, String key) {
-        JsonElement element = jsonObject.get(key);
-        return (element != null && !element.isJsonNull()) ? element.getAsString() : null;
-    }
-
-    // 辅助方法用于获取字符串值或返回 null（如果不存在或为 null）
-    private static boolean getBooleanOrNull(JsonObject jsonObject, String key) {
-        JsonElement element = jsonObject.get(key);
-        return element != null && !element.isJsonNull() && element.getAsBoolean();
-    }
 }

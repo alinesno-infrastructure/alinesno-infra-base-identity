@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "LoginSetting")
 @RestController
 @Scope(SpringInstanceScope.PROTOTYPE)
-@RequestMapping("/api/infra/base/identity/login_setting")
+@RequestMapping("/api/infra/base/identity/loginSetting")
 public class LoginSettingController extends BaseController<LoginSettingEntity, ILoginSettingService> {
 
     // 日志记录

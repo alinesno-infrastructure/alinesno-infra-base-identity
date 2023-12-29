@@ -2,7 +2,6 @@ package com.alinesno.infra.base.identity.auth.listener;
 
 import cn.dev33.satoken.listener.SaTokenListener;
 import cn.dev33.satoken.stp.SaLoginModel;
-import com.alinesno.infra.base.identity.adapter.LoginEventConsumer;
 import com.alinesno.infra.base.identity.auth.event.LoginTypeEvent;
 import com.alinesno.infra.base.identity.auth.event.PublishService;
 import com.alinesno.infra.base.identity.entity.LoginEventEntity;
@@ -10,6 +9,8 @@ import com.alinesno.infra.base.identity.enums.LoginEventType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.CompletableFuture;
 
 /**
  * 自定义侦听器的实现 
@@ -110,6 +111,10 @@ public class GlobalSaTokenListener implements SaTokenListener {
         entity.setEventType(type.getLabel() + ":" + type.getValue());
 
         LoginTypeEvent loginTypeEvent = new LoginTypeEvent(entity) ;
-        publishService.pub(loginTypeEvent);
+
+        CompletableFuture.runAsync(() -> {
+            publishService.publishEvent(loginTypeEvent);
+        });
+
     }
 }

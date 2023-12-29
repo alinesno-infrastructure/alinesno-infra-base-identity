@@ -8,38 +8,34 @@ import com.dtflys.forest.annotation.Query;
 /**
  * 单点登陆账户操作接口
  */
-@BaseRequest(baseURL = "#{alinesno.infra.gateway.host}/base-identity-auth" , connectTimeout = 30*1000)
+@BaseRequest(baseURL = "#{alinesno.infra.gateway.host}" , connectTimeout = 30*1000)
 public interface IdentityAccountConsumer {
 
     // 将指定账号强制注销
-    @Get(url="/kickout/logout")
+    @Get(url="/api/base/identity/auth/kickout/logout")
     AjaxResult logout(@Query String userId) ;
 
     // 将指定账号踢下线
-    @Get(url="/kickout")
+    @Get(url="/api/base/identity/auth/kickout/kickout")
     AjaxResult kickout(@Query String userId) ;
 
     // 根据 Token 值踢人
-    @Get(url="/kickout/kickoutByTokenValue")
+    @Get(url="/api/base/identity/auth/kickout/kickoutByTokenValue")
     AjaxResult kickoutByTokenValue(@Query String tokenValue) ;
 
     // 封禁指定账号
-    @Get(url = "/disable")
+    @Get(url = "/api/base/identity/auth/disable/disable")
     AjaxResult disable(@Query String userId);
 
     // 解封指定账号
-    @Get(url = "/disable/untieDisable")
+    @Get(url = "/api/base/identity/auth/disable/untieDisable")
     AjaxResult untieDisable(@Query String userId);
 
-    // 身份切换
-    @Get(url = "/switchTo")
-    AjaxResult switchTo(@Query String userId);
-
     // 以 lambda 表达式的方式身份切换
-    @Get(url = "/switchToUser")
-    AjaxResult switchToUser(@Query String userId);
+    @Get(url = "/api/base/identity/auth/switchTo/toUser")
+    AjaxResult toUser(@Query String userId);
 
-    // 会话查询接口 ---- http://localhost:8081/search/getList?start=0&size=10
-    @Get(url="/search/getList")
-    AjaxResult getList(int start, int size) ;
+    // 会话查询接口
+    @Get(url="/api/base/identity/auth/search/getList")
+    AjaxResult getList(@Query("keyword") String keyword , @Query("start") int start, @Query("size") int size) ;
 }

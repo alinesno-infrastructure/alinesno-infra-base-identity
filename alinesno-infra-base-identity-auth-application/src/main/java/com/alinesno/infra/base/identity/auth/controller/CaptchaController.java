@@ -25,11 +25,6 @@ public class CaptchaController {
     @Resource(name = "captchaProducerMath")
     private Producer captchaProducerMath;
 
-    public CaptchaController(Producer captchaProducer, Producer captchaProducerMath) {
-        this.captchaProducer = captchaProducer;
-        this.captchaProducerMath = captchaProducerMath;
-    }
-
     /**
      * 生成验证码
      */

@@ -22,6 +22,11 @@
 			<artifactId>alinesno-infra-base-identity-facade</artifactId>
 			<version>${revision}</version>
         </dependency>
+		<dependency>
+			<groupId>com.alinesno.infra.base</groupId>
+			<artifactId>alinesno-infra-base-identity-adapter</artifactId>
+			<version>${revision}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.alinesno.infra.common</groupId>

@@ -2,16 +2,17 @@ package com.alinesno.infra.base.identity.auth.config;
 
 import cn.dev33.satoken.config.SaSsoConfig;
 import cn.dev33.satoken.context.SaHolder;
+import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
+import com.alibaba.fastjson.JSONObject;
 import com.alinesno.infra.base.authority.gateway.dto.ManagerAccountDto;
-import com.alinesno.infra.base.identity.adapter.LoginEventConsumer;
 import com.alinesno.infra.base.identity.adapter.ManagerAccountConsumer;
 import com.alinesno.infra.base.identity.adapter.dto.LoginParamDto;
 import com.alinesno.infra.base.identity.auth.dto.LoginUser;
 import com.alinesno.infra.base.identity.auth.event.LoginRecordEvent;
-import com.alinesno.infra.base.identity.auth.event.LoginTypeEvent;
 import com.alinesno.infra.base.identity.auth.event.PublishService;
+import com.alinesno.infra.base.identity.constants.AuthConstants;
 import com.alinesno.infra.base.identity.entity.LoginRecordEntity;
 import com.dtflys.forest.Forest;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Component
 @Slf4j
@@ -59,12 +61,16 @@ public class SaTokenConfigure {
             dto.setPassword(loginUser.getPassword());
 
             ManagerAccountDto accountDto = accountConsumer.loginAccount(dto) ;
-            log.debug("accountDto = {}" , accountDto);
+            log.debug("accountDto = {}" , JSONObject.toJSONString(accountDto));
 
             // 此处仅做模拟登录，真实环境应该查询数据进行登录
             StpUtil.login(accountDto.getId());
 
             log.debug("isLogin = {}" , StpUtil.isLogin());
+
+            // 设置会话信息
+            SaSession session = StpUtil.getSession();
+            session.set(AuthConstants.CURRENT_ACCOUNT_DTO , accountDto);
 
             // 登陆成功记录
             loginRecord() ;
@@ -76,7 +82,7 @@ public class SaTokenConfigure {
         sso.setSendHttp(url -> {
             try {
                 // 发起 http 请求
-                System.out.println("------ 发起请求：" + url);
+                log.debug("------ 发起请求：" + url);
                 return Forest.get(url).executeAsString();
             } catch (Exception e) {
                 log.error("发起请求异常:{}" , e.getMessage());
@@ -92,7 +98,11 @@ public class SaTokenConfigure {
         LoginRecordEntity dto = new LoginRecordEntity() ;
 
         final LoginRecordEvent userEvent = new LoginRecordEvent(dto);
-        publishService.pub(userEvent);
+
+        CompletableFuture.runAsync(() -> {
+            publishService.publishEvent(userEvent);
+        });
+
     }
 
 //    /**
@@ -107,7 +117,7 @@ public class SaTokenConfigure {
 //
 //                // 认证函数: 每次请求执行
 //                .setAuth(obj -> {
-//                    System.out.println("---------- 进入Sa-Token全局认证 -----------");
+//                    log.debug("---------- 进入Sa-Token全局认证 -----------");
 //
 //                    // 登录认证 -- 拦截所有路由，并排除/user/doLogin 用于开放登录
 //                    SaRouter.match("/**", "/user/doLogin", StpUtil::checkLogin);
@@ -117,7 +127,7 @@ public class SaTokenConfigure {
 //
 //                // 异常处理函数：每次认证函数发生异常时执行此函数
 //                .setError(e -> {
-//                    System.out.println("---------- 进入Sa-Token异常处理 -----------");
+//                    log.debug("---------- 进入Sa-Token异常处理 -----------");
 //                    return SaResult.error(e.getMessage());
 //                })
 //

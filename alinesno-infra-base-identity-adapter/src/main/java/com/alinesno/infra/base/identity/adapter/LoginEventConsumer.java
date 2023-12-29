@@ -1,5 +1,6 @@
 package com.alinesno.infra.base.identity.adapter;
 
+import com.alinesno.infra.base.identity.api.AuthWebLogDto;
 import com.alinesno.infra.base.identity.entity.LoginEventEntity;
 import com.alinesno.infra.base.identity.entity.LoginRecordEntity;
 import com.dtflys.forest.annotation.BaseRequest;
@@ -31,4 +32,10 @@ public interface LoginEventConsumer {
     @Post(url = "/v1/api/base/identity/login/record")
     void loginRecord(@Body LoginRecordEntity dto);
 
+    /**
+     * 请求记录日志
+     * @param source
+     */
+    @Post(url = "/v1/api/base/identity/login/authWebLog")
+    void authWebLog(@Body AuthWebLogDto source);
 }

@@ -13,7 +13,7 @@ import cn.dev33.satoken.util.SaResult;
  * @since 2022-10-17 
  */
 @RestController
-@RequestMapping("/basic/")
+@RequestMapping("/api/base/identity/auth/basic/")
 public class HttpBasicController {
 
 	/*

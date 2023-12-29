@@ -1,8 +1,19 @@
 package com.alinesno.infra.base.identity.auth.controller;
 
 import cn.dev33.satoken.session.SaSession;
+import cn.dev33.satoken.session.TokenSign;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.dev33.satoken.util.SaResult;
+import com.alibaba.fastjson.JSONObject;
+import com.alinesno.infra.base.authority.gateway.dto.ManagerAccountDto;
+import com.alinesno.infra.base.identity.api.SaSessionInfoDto;
+import com.alinesno.infra.base.identity.api.TokenSignDto;
+import com.alinesno.infra.base.identity.constants.AuthConstants;
+import com.alinesno.infra.common.facade.response.AjaxResult;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.BeanUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,62 +26,56 @@ import java.util.List;
  * @author click33
  * @since 2022-10-17 
  */
+@Slf4j
 @RestController
-@RequestMapping("/search/")
+@RequestMapping("/api/base/identity/auth/search/")
 public class SearchSessionController {
 
-	/*
-	 * 测试步骤：
-	 	1、先登录5个账号
-	 		 ---- http://localhost:8081/search/login?userId=10001&张三&age=18
-	 		 ---- http://localhost:8081/search/login?userId=10002&李四&age=20
-	 		 ---- http://localhost:8081/search/login?userId=10003&王五&age=22
-	 		 ---- http://localhost:8081/search/login?userId=10004&赵六&age=24
-	 		 ---- http://localhost:8081/search/login?userId=10005&冯七&age=26
-	 		 
-	 	2、根据分页参数获取会话列表
-	 		http://localhost:8081/search/getList?start=0&size=10
-	 */
+	// 会话查询接口
+	@GetMapping("getList")
+	public AjaxResult getList(int start, int size , String keyword) {
 
-//	// 会话登录接口  ---- http://localhost:8081/search/login?userId=10001&张三&age=18
-//	@RequestMapping("login")
-//	public SaResult login(long userId, String name, int age) {
-//		// 先登录上
-//		StpUtil.login(userId);
-//
-//		// 再把 User 对象存储在 SaSession 上
-//		SysUser user = new SysUser();
-//		user.setId(userId);
-//		user.setName(name);
-//		user.setAge(age);
-//		StpUtil.getSession().set("user", user);
-//
-//		// 返回
-//		return SaResult.ok("账号登录成功");
-//	}
+		keyword = StringUtils.isNotBlank(keyword)?keyword:"" ;
 
-	// 会话查询接口  ---- http://localhost:8081/search/getList?start=0&size=10
-	@RequestMapping("getList")
-	public SaResult getList(int start, int size) {
 		// 创建集合
-		List<SaSession> sessionList = new ArrayList<>();
+		List<SaSessionInfoDto> sessionList = new ArrayList<>();
 
 		// 分页查询数据 
-		List<String> sessionIdList = StpUtil.searchSessionId("", start, size, false);
+		List<String> sessionIdList = StpUtil.searchSessionId(keyword, start, size, false);
 		for (String sessionId: sessionIdList) {
+
 			SaSession session = StpUtil.getSessionBySessionId(sessionId);
-			sessionList.add(session);
+
+			SaSessionInfoDto sessionDto = getSaSessionInfoDto(session);
+
+			sessionList.add(sessionDto);
 		}
 
 		// 返回 
-		return SaResult.data(sessionList);
+		return AjaxResult.success(sessionList);
 	}
 
-	// 会话查询接口  ---- http://localhost:8081/disable/logout
-	@RequestMapping("logout")
-	public SaResult logout() {
-		StpUtil.logout();
-		return SaResult.ok("账号退出成功");
+	@NotNull
+	private static SaSessionInfoDto getSaSessionInfoDto(SaSession session) {
+		ManagerAccountDto managerAccountDto = (ManagerAccountDto) session.get(AuthConstants.CURRENT_ACCOUNT_DTO);
+		log.debug("managerAccountDto = {}" , JSONObject.toJSONString(managerAccountDto));
+
+		SaSessionInfoDto sessionDto = new SaSessionInfoDto() ;
+		BeanUtils.copyProperties(managerAccountDto , sessionDto);
+		BeanUtils.copyProperties(session, sessionDto);
+		sessionDto.setUserId(managerAccountDto.getId());
+
+		List<TokenSign> signs = session.getTokenSignList() ;
+		List<TokenSignDto> signDtos = new ArrayList<>() ;
+
+		for(TokenSign tokenSign : signs){
+			TokenSignDto signDto = new TokenSignDto() ;
+			BeanUtils.copyProperties(tokenSign, signDto);
+			signDtos.add(signDto) ;
+		}
+
+		sessionDto.setTokenSignList(signDtos);
+		return sessionDto;
 	}
 
 }

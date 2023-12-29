@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "AuthorityScope")
 @RestController
 @Scope(SpringInstanceScope.PROTOTYPE)
-@RequestMapping("/api/infra/base/identity/authority_scope")
+@RequestMapping("/api/infra/base/identity/authorityScope")
 public class AuthorityScopeController extends BaseController<AuthorityScopeEntity, IAuthorityScopeService> {
 
     // 日志记录

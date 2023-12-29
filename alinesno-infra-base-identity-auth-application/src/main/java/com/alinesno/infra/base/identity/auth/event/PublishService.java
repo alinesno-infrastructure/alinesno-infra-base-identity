@@ -15,7 +15,7 @@ public class PublishService implements ApplicationEventPublisherAware {
         publisher = applicationEventPublisher;
     }
  
-    public void pub(Object event){
+    public void publishEvent(Object event){
         publisher.publishEvent(event);
     }
 }

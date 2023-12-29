@@ -31,113 +31,140 @@
                <right-toolbar v-model:showSearch="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
             </el-row>
 
-            <el-table v-loading="loading" :data="ApplicationList" @selection-change="handleSelectionChange">
-               <el-table-column type="selection" width="50" align="center" />
-               <el-table-column label="图标" align="center" with="80" key="status" v-if="columns[5].visible">
+            <el-table v-loading="loading" :data="AccountOnlineList" @selection-change="handleSelectionChange">
+               <el-table-column type="selection" width="30" align="center" />
+
+               <el-table-column label="头像" align="center" width="80" key="status">
+                  <template #default="scope">
+                     <div class="role-icon">
+                        <img :src="'http://data.linesno.com/icons/circle/Delivery boy-' + ((scope.$index + 1)%5 + 1) + '.png'" />
+                     </div>
+                  </template>
                </el-table-column>
 
                <!-- 业务字段-->
-               <el-table-column label="应用名称" align="center" key="dbName" prop="dbName" v-if="columns[0].visible" />
-               <el-table-column label="应用描述" align="center" key="dbDesc" prop="dbDesc" v-if="columns[1].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="表数据量" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="类型" align="center" key="dbType" prop="dbType" v-if="columns[3].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="应用地址" align="center" key="jdbcUrl" prop="jdbcUrl" v-if="columns[4].visible" width="120" />
-               <el-table-column label="状态" align="center" key="hasStatus" v-if="columns[5].visible" />
-
-               <el-table-column label="添加时间" align="center" prop="addTime" v-if="columns[6].visible" width="160">
+               <el-table-column label="账号信息" align="left" width="250" key="dbDesc" prop="dbDesc" v-if="columns[1].visible">
                   <template #default="scope">
-                     <span>{{ parseTime(scope.row.addTime) }}</span>
+                     用户名: 平台管理员服务 <br/>
+                     <div style="font-size: 13px;color: #a5a5a5;">
+                        登陆账号: {{ scope.row.loginName }}
+                     </div>
+                  </template>
+               </el-table-column>
+               <el-table-column label="账号ID" align="center" key="userId" prop="userId">
+                  <template #default="scope">
+                     <el-button type="primary" text bg icon="CopyDocument" v-copyText="scope.row.userId">{{ scope.row.userId }}</el-button>
+                  </template>
+               </el-table-column>
+
+               <el-table-column label="会话创建时间" align="left" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" >
+                  <template #default="scope">
+                     <span>{{ parseTime(scope.row.createTime ) }}</span> <br/>
+                     <div style="font-size: 13px;color: #a5a5a5;">
+                      2天22时16分
+                     </div>
+                  </template>
+               </el-table-column>
+               <el-table-column label="会话失效时间" align="left" key="dbType" prop="dbType" v-if="columns[3].visible" :show-overflow-tooltip="true" >
+                  <template #default="scope">
+                     <span>{{ parseTime(scope.row.createTime) }}</span> <br/>
+                     <div style="font-size: 13px;color: #a5a5a5;">
+                      3天12时16分
+                     </div>
+                  </template>
+               </el-table-column>
+               <el-table-column label="登陆数量" align="center" key="jdbcUrl" prop="jdbcUrl" v-if="columns[4].visible">
+                  <template #default="scope">
+                     <el-button type="primary" text bg icon="ChromeFilled"  @click="handleClientList(scope.row)">1个客户端</el-button>
+                  </template>
+               </el-table-column>
+               <el-table-column label="登陆地址" align="left" key="hasStatus" v-if="columns[5].visible">
+                  <template #default="scope">
+                     湖南 长沙市 - 172.20.200.171
+                     <div style="font-size: 13px;color: #a5a5a5;">
+                     OS:Windows10 Chrome12
+                     </div>
                   </template>
                </el-table-column>
 
                <!-- 操作字段  -->
-               <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
+               <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width">
                   <template #default="scope">
-                     <el-tooltip content="修改" placement="top" v-if="scope.row.ApplicationId !== 1">
-                        <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
-                           v-hasPermi="['system:Application:edit']"></el-button>
+                     <el-tooltip content="踢下线" placement="top">
+                        <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:AccountOnline:edit']">踢下线</el-button>
                      </el-tooltip>
-                     <el-tooltip content="删除" placement="top" v-if="scope.row.ApplicationId !== 1">
-                        <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
-                           v-hasPermi="['system:Application:remove']"></el-button>
+                     <el-tooltip content="强制注销" placement="top">
+                        <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['system:AccountOnline:remove']">强制注销</el-button>
                      </el-tooltip>
                   </template>
-
                </el-table-column>
+
             </el-table>
             <pagination v-show="total > 0" :total="total" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize" @pagination="getList" />
          </el-col>
       </el-row>
 
       <!-- 添加或修改应用配置对话框 -->
-      <el-dialog :title="title" v-model="open" width="900px" append-to-body>
-         <el-form :model="form" :rules="rules" ref="databaseRef" label-width="100px">
-            <el-row>
-               <el-col :span="24">
-                  <el-form-item label="名称" prop="dbName">
-                     <el-input v-model="form.dbName" placeholder="请输入应用名称" maxlength="50" />
-                  </el-form-item>
-               </el-col>
-            </el-row>
-            <el-row>
-               <el-col :span="24">
-                  <el-form-item label="连接" prop="jdbcUrl">
-                     <el-input v-model="form.jdbcUrl" placeholder="请输入jdbcUrl连接地址" maxlength="128" />
-                  </el-form-item>
-               </el-col>
-               <el-col :span="24">
-                  <el-form-item label="类型" prop="dbType">
-                     <el-input v-model="form.dbType" placeholder="请输入类型" maxlength="50" />
-                  </el-form-item>
-               </el-col>
-            </el-row>
-            <el-row>
-               <el-col :span="24">
-                  <el-form-item label="用户名" prop="dbUsername">
-                     <el-input v-model="form.dbUsername" placeholder="请输入连接用户名" maxlength="30" />
-                  </el-form-item>
-               </el-col>
-               <el-col :span="24">
-                  <el-form-item label="密码" prop="dbPasswd">
-                     <el-input v-model="form.dbPasswd" placeholder="请输入应用密码" type="password" maxlength="30" show-password />
-                  </el-form-item>
-               </el-col>
-            </el-row>
+      <el-dialog :title="title" v-model="open" width="1000px" append-to-body>
+         
+         <el-table :data="tableData" style="width: 100%">
 
-            <el-row>
-               <el-col :span="24">
-                  <el-form-item label="备注" prop="dbDesc">
-                     <el-input v-model="form.dbDesc" placeholder="请输入应用备注"></el-input>
-                  </el-form-item>
-               </el-col>
-            </el-row>
-         </el-form>
+            <el-table-column type="index" label="序号" width="50" align="center" />
+
+            <el-table-column prop="device" label="设备类型" width="150">
+                  <template #default="scope">
+                     <el-button type="primary" text bg icon="ChromeFilled">{{ scope.row.device }}</el-button>
+                  </template>
+            </el-table-column>
+            <el-table-column prop="value" align="center" label="Token凭证" />
+
+            <el-table-column label="会话失效时间" align="center" key="dbType" width="160" prop="dbType" v-if="columns[3].visible" :show-overflow-tooltip="true" >
+               <template #default="scope">
+                  <span>{{ parseTime(scope.row.createTime) }}</span> <br/>
+               </template>
+            </el-table-column>
+
+            <!-- 操作字段  -->
+            <el-table-column label="操作" align="center" width="200" class-name="small-padding fixed-width">
+               <template #default="scope">
+                  <el-tooltip content="踢下线" placement="top">
+                     <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:AccountOnline:edit']">踢下线</el-button>
+                  </el-tooltip>
+                  <el-tooltip content="强制注销" placement="top">
+                     <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['system:AccountOnline:remove']">强制注销</el-button>
+                  </el-tooltip>
+               </template>
+            </el-table-column>
+
+         </el-table>
+
          <template #footer>
             <div class="dialog-footer">
-               <el-button type="primary" @click="submitForm">确 定</el-button>
+               <!-- <el-button type="primary" @click="submitForm">确 定</el-button> -->
                <el-button @click="cancel">取 消</el-button>
             </div>
          </template>
+
       </el-dialog>
 
    </div>
 </template>
 
-<script setup name="Application">
+<script setup name="AccountOnline">
 
 import {
-   listApplication,
-   delApplication,
-   getApplication,
-   updateApplication,
-   addApplication
-} from "@/api/base/identity/application";
+   listAccountOnline,
+   delAccountOnline,
+   getAccountOnline,
+   updateAccountOnline,
+   addAccountOnline
+} from "@/api/base/identity/online";
 
 const router = useRouter();
 const { proxy } = getCurrentInstance();
 
 // 定义变量
-const ApplicationList = ref([]);
+const AccountOnlineList = ref([]);
 const open = ref(false);
 const loading = ref(true);
 const showSearch = ref(true);
@@ -149,6 +176,19 @@ const title = ref("");
 const dateRange = ref([]);
 const postOptions = ref([]);
 const roleOptions = ref([]);
+
+const tableData = ref([
+  {
+    createTime: '1703826182819',
+    device: 'PC',
+    value: '3a94e641-d531-4826-8f52-61795a40ea94',
+  },
+  {
+    createTime: '1703826182819',
+    device: 'default-device',
+    value: '3a94e641-d531-4826-8f52-61795a40ea94',
+  },
+]);
 
 // 列显隐信息
 const columns = ref([
@@ -184,9 +224,9 @@ const { queryParams, form, rules } = toRefs(data);
 /** 查询应用列表 */
 function getList() {
    loading.value = true;
-   listApplication(proxy.addDateRange(queryParams.value, dateRange.value)).then(res => {
+   listAccountOnline(proxy.addDateRange(queryParams.value, dateRange.value)).then(res => {
       loading.value = false;
-      ApplicationList.value = res.rows;
+      AccountOnlineList.value = res.rows;
       total.value = res.total;
    });
 };
@@ -207,9 +247,9 @@ function resetQuery() {
 };
 /** 删除按钮操作 */
 function handleDelete(row) {
-   const ApplicationIds = row.id || ids.value;
-   proxy.$modal.confirm('是否确认删除应用编号为"' + ApplicationIds + '"的数据项？').then(function () {
-      return delApplication(ApplicationIds);
+   const AccountOnlineIds = row.id || ids.value;
+   proxy.$modal.confirm('是否确认删除应用编号为"' + AccountOnlineIds + '"的数据项？').then(function () {
+      return delAccountOnline(AccountOnlineIds);
    }).then(() => {
       getList();
       proxy.$modal.msgSuccess("删除成功");
@@ -228,7 +268,7 @@ function reset() {
    form.value = {
       id: undefined,
       deptId: undefined,
-      ApplicationName: undefined,
+      AccountOnlineName: undefined,
       nickName: undefined,
       password: undefined,
       phonenumber: undefined,
@@ -244,17 +284,17 @@ function cancel() {
 };
 
 /** 新增按钮操作 */
-function handleAdd() {
+function handleClientList() {
    reset();
    open.value = true;
-   title.value = "添加应用";
+   title.value = "登陆客户端列表";
 };
 
 /** 修改按钮操作 */
 function handleUpdate(row) {
    reset();
-   const ApplicationId = row.id || ids.value;
-   getApplication(ApplicationId).then(response => {
+   const AccountOnlineId = row.id || ids.value;
+   getAccountOnline(AccountOnlineId).then(response => {
       form.value = response.data;
       open.value = true;
       title.value = "修改应用";
@@ -265,14 +305,14 @@ function handleUpdate(row) {
 function submitForm() {
    proxy.$refs["databaseRef"].validate(valid => {
       if (valid) {
-         if (form.value.ApplicationId != undefined) {
-            updateApplication(form.value).then(response => {
+         if (form.value.AccountOnlineId != undefined) {
+            updateAccountOnline(form.value).then(response => {
                proxy.$modal.msgSuccess("修改成功");
                open.value = false;
                getList();
             });
          } else {
-            addApplication(form.value).then(response => {
+            addAccountOnline(form.value).then(response => {
                proxy.$modal.msgSuccess("新增成功");
                open.value = false;
                getList();
