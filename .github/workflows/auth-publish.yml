@@ -214,6 +214,6 @@ jobs:
             export DB_MYSQL_USRENAME=${{ secrets.DEV_DB_MYSQL_USRENAME }}
             export DB_MYSQL_PASSWORD=${{ secrets.DEV_DB_MYSQL_PASSWORD }}
  
-            export INFRA_GATEWAY_PROXY = ${{ secrets.DEV_INFRA_GATEWAY_PROXY }}
+            export INFRA_GATEWAY_PROXY=${{ secrets.DEV_INFRA_GATEWAY_PROXY }}
  
             envsubst < /home/github-action/${{ env.PROJECT_NAME }}/kubernetes-auth-${{ env.CURRENT_PROFIRE }}.yml | kubectl apply -f -
