@@ -27,9 +27,7 @@ const menuItems = ref([
   {id:'4' , icon:'fa-solid fa-at' , link:'/base/identity/account/index' , desc:'账户管理'},
   {id:'5' , icon:'fa-regular fa-envelope-open' , link:'/base/identity/config/index' , desc:'认证配置'},
   {id:'6' , icon:'fa-solid fa-file-word' , link:'/base/identity/security/index' , desc:'企业配置'}, 
-  {id:'7' , icon:'fa-solid fa-user-shield' , link:'/base/identity/eventRecord/index' , desc:'事件日志记录'}, 
-  {id:'9' , icon:'fas fa-hdd' , link:'/base/identity/loginRecord/index' , desc:'登陆日志记录'}, 
-  {id:'8' , icon:'fab fa-docker' , link:'/base/identity/apiRecord/index' , desc:'请求日志记录'}, 
+  {id:'7' , icon:'fa-solid fa-user-shield' , link:'/base/identity/accountSync/index' , desc:'账户同步'}, 
 ]);
 
 // 打开服务市场

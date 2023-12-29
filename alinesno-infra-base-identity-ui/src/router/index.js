@@ -121,6 +121,12 @@ export const constantRoutes = [
         name: '/base/identity/apiRecord/index',
         meta: { title: '日志记录', icon: 'dashboard', affix: true }
       }, 
+      {
+        path: '/base/identity/accountSync/index',
+        component: () => import('@/views/base/identity/accountSync/index'),
+        name: '/base/identity/accountSync/index',
+        meta: { title: '账户同步', icon: 'dashboard', affix: true }
+      }, 
       // >>>>>>>>>>>>>> identity_router_end   >>>>>>>>>>>>>>>>>>>>>
 
     ]

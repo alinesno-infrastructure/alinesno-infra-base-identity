@@ -45,7 +45,9 @@ spec:
                 -Dspring.datasource.username=${DB_MYSQL_USRENAME}
                 -Dspring.datasource.password=${DB_MYSQL_PASSWORD}
                 -Dserver.port=8080 
-                -Dalinesno.infra.gateway.host=${INFRA_GATEWAY_PROXY} 
+                -Dalinesno.infra.gateway.host=${INFRA_GATEWAY_PROXY}
+                -Dalinesno.infra.gateway.base-identity.host=http://alinesno-infra-base-identity-boot:8080
+                -Dalinesno.infra.gateway.base-identity-auth.host=http://alinesno-infra-base-identity-auth-application:8080
           ports:
             - name: http
               containerPort: 8080

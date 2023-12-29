@@ -11,7 +11,7 @@ import com.dtflys.forest.annotation.Post;
 /**
  * 记录登陆事件信息
  */
-@BaseRequest(baseURL = "#{alinesno.infra.gateway.host}/base-identity" , connectTimeout = 30*1000)
+@BaseRequest(baseURL = "#{alinesno.infra.gateway.base-identity.host}" , connectTimeout = 30*1000)
 @Headers({
         "Content-Type: application/json",
         "Accept: */*",

@@ -46,9 +46,10 @@ public class SearchSessionController {
 
 			SaSession session = StpUtil.getSessionBySessionId(sessionId);
 
-			SaSessionInfoDto sessionDto = getSaSessionInfoDto(session);
-
-			sessionList.add(sessionDto);
+			if(session.get(AuthConstants.CURRENT_ACCOUNT_DTO) != null){
+				SaSessionInfoDto sessionDto = getSaSessionInfoDto(session);
+				sessionList.add(sessionDto);
+			}
 		}
 
 		// 返回 
@@ -58,7 +59,7 @@ public class SearchSessionController {
 	@NotNull
 	private static SaSessionInfoDto getSaSessionInfoDto(SaSession session) {
 		ManagerAccountDto managerAccountDto = (ManagerAccountDto) session.get(AuthConstants.CURRENT_ACCOUNT_DTO);
-		log.debug("managerAccountDto = {}" , JSONObject.toJSONString(managerAccountDto));
+		log.debug("-->>> managerAccountDto = {}" , JSONObject.toJSONString(managerAccountDto));
 
 		SaSessionInfoDto sessionDto = new SaSessionInfoDto() ;
 		BeanUtils.copyProperties(managerAccountDto , sessionDto);

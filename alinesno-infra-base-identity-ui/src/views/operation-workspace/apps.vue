@@ -47,7 +47,7 @@
       <el-col :span="5">
         <div class="grid-content">
           <div class="panel-header">
-            <div class="header-title"><i class="fa-solid fa-link"></i> 构建解决方案</div>
+            <div class="header-title"><i class="fa-solid fa-link"></i> 运行日志记录</div>
           </div>
           <div class="panel-body" style="height: auto;position: relative;">
             <div class="acp-app-list">
@@ -57,7 +57,10 @@
                     <img :src="item.icon" :alt="item.name" />
                   </div>
                   <div class="app-info">
-                    <div class="app-item-title">{{ item.name }} <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <div class="app-item-title">
+                      <router-link :to="item.link">
+                        {{ item.name }} <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                      </router-link>
                     </div>
                     <div class="app-item desc">{{ item.desc }}</div>
                   </div>
@@ -121,10 +124,11 @@ const resources = ref([
       ]) ; 
 
 const apps = ref([
-  {icon:'https://d1by4p17n947rt.cloudfront.net/icon/d88319dfa5d204f019b4284149886c59-7d586ea82f792b61a8c87de60565133d.svg' , name:'自动化操作服务' , desc:'With Route 53 (3 分钟)'},
-  {icon:'https://d1by4p17n947rt.cloudfront.net/icon/9da5a168cf8194c8ee5ed192a443d563-674375b53bc8ae94f48cfdb5c81e8363.svg' , name:'分布式配置中心' , desc:'With Route 53 (3 分钟)'},
-  {icon:'https://d1by4p17n947rt.cloudfront.net/icon/a5ffe5487f62ef75d8e5cf78c18525a5-d4867f9d4adcd749f0c5aff987232847.svg' , name:'审计日志服务' , desc:'With Route 53 (3 分钟)'},
-  {icon:'https://d1by4p17n947rt.cloudfront.net/icon/6e9e16955bd76c1d3a9996e0d6d3ad15-04cfc8c62f597690680d948b366980cf.svg' , name:'持续集成服务' , desc:'With Route 53 (3 分钟)'},
+  {icon:'https://d1by4p17n947rt.cloudfront.net/icon/d88319dfa5d204f019b4284149886c59-7d586ea82f792b61a8c87de60565133d.svg' , name:'用户登陆日志' , desc:'With Route 53 (3 分钟)' , link:'/base/identity/eventRecord/index'},
+  {icon:'https://d1by4p17n947rt.cloudfront.net/icon/9da5a168cf8194c8ee5ed192a443d563-674375b53bc8ae94f48cfdb5c81e8363.svg' , name:'单点运行事件日志' , desc:'With Route 53 (3 分钟)' , link:'/base/identity/loginRecord/index'},
+  {icon:'https://d1by4p17n947rt.cloudfront.net/icon/a5ffe5487f62ef75d8e5cf78c18525a5-d4867f9d4adcd749f0c5aff987232847.svg' , name:'接口请求日志' , desc:'With Route 53 (3 分钟)' , link:'/base/identity/apiRecord/index'},
+  {icon:'https://d1by4p17n947rt.cloudfront.net/icon/6e9e16955bd76c1d3a9996e0d6d3ad15-04cfc8c62f597690680d948b366980cf.svg' , name:'管理员操作日志' , desc:'With Route 53 (3 分钟)' , link:'/base/identity/apiRecord/index'},
+  {icon:'https://d1by4p17n947rt.cloudfront.net/icon/d88319dfa5d204f019b4284149886c59-7d586ea82f792b61a8c87de60565133d.svg' , name:'运行异常日志' , desc:'With Route 53 (3 分钟)' , link:'/base/identity/apiRecord/index'},
 ]);
 
 

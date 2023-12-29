@@ -8,7 +8,7 @@ import com.dtflys.forest.annotation.Query;
 /**
  * 单点登陆账户操作接口
  */
-@BaseRequest(baseURL = "#{alinesno.infra.gateway.host}" , connectTimeout = 30*1000)
+@BaseRequest(baseURL = "#{alinesno.infra.gateway.base-identity-auth.host}" , connectTimeout = 30*1000)
 public interface IdentityAccountConsumer {
 
     // 将指定账号强制注销

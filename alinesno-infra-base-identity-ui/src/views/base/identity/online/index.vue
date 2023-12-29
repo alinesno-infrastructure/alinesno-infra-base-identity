@@ -34,16 +34,16 @@
             <el-table v-loading="loading" :data="AccountOnlineList" @selection-change="handleSelectionChange">
                <el-table-column type="selection" width="30" align="center" />
 
-               <el-table-column label="头像" align="center" width="80" key="status">
+               <el-table-column label="头像" align="center" width="60" key="status">
                   <template #default="scope">
                      <div class="role-icon">
-                        <img :src="'http://data.linesno.com/icons/circle/Delivery boy-' + ((scope.$index + 1)%5 + 1) + '.png'" />
+                        <img :src="'http://data.linesno.com/icons/sepcialist/dataset_' + ((scope.$index + 1)%5 + 40) + '.png'" />
                      </div>
                   </template>
                </el-table-column>
 
                <!-- 业务字段-->
-               <el-table-column label="账号信息" align="left" width="250" key="dbDesc" prop="dbDesc" v-if="columns[1].visible">
+               <el-table-column label="账号信息" align="left" width="230" key="dbDesc" prop="dbDesc" v-if="columns[1].visible">
                   <template #default="scope">
                      用户名: 平台管理员服务 <br/>
                      <div style="font-size: 13px;color: #a5a5a5;">
@@ -78,17 +78,17 @@
                      <el-button type="primary" text bg icon="ChromeFilled"  @click="handleClientList(scope.row)">1个客户端</el-button>
                   </template>
                </el-table-column>
-               <el-table-column label="登陆地址" align="left" key="hasStatus" v-if="columns[5].visible">
+               <el-table-column label="登陆地址" align="left" width="150" key="hasStatus" v-if="columns[5].visible">
                   <template #default="scope">
-                     湖南 长沙市 - 172.20.200.171
+                     湖南 长沙市
                      <div style="font-size: 13px;color: #a5a5a5;">
-                     OS:Windows10 Chrome12
+                      172.20.200.171
                      </div>
                   </template>
                </el-table-column>
 
                <!-- 操作字段  -->
-               <el-table-column label="操作" align="center" width="250" class-name="small-padding fixed-width">
+               <el-table-column label="操作" align="center" width="200" class-name="small-padding fixed-width">
                   <template #default="scope">
                      <el-tooltip content="踢下线" placement="top">
                         <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:AccountOnline:edit']">踢下线</el-button>
