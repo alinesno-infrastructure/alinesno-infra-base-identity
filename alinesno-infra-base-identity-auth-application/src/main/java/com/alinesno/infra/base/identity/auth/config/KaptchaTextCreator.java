@@ -8,14 +8,14 @@ import com.google.code.kaptcha.text.impl.DefaultTextCreator;
  * 验证码文本生成器
  * 
  * @author ruoyi
+ * @author luoxiaodong
  */
-public class KaptchaTextCreator extends DefaultTextCreator
-{
+public class KaptchaTextCreator extends DefaultTextCreator {
+
     private static final String[] CNUMBERS = "0,1,2,3,4,5,6,7,8,9,10".split(",");
 
     @Override
-    public String getText()
-    {
+    public String getText() {
         Integer result = 0;
         Random random = new SecureRandom();
         int x = random.nextInt(10);
@@ -71,7 +71,8 @@ public class KaptchaTextCreator extends DefaultTextCreator
             suChinese.append("+");
             suChinese.append(CNUMBERS[y]);
         }
-        suChinese.append("=?@" + result);
+        suChinese.append("=?@")
+                .append(result);
         return suChinese.toString();
     }
 }

@@ -15,7 +15,7 @@ export function login(username, password, code, uuid , loginType , phoneNumber ,
     url: '/sso/doLogin',
     headers: {
       isToken: false ,
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     },
     method: 'post',
     data: data

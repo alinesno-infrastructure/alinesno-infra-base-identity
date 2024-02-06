@@ -1073,7 +1073,8 @@ $chartColor: #3b5998;
 
   .main-box {
     background-size: cover;
-    background-image: url("https://img.alicdn.com/imgextra/i3/O1CN018YDlO91csxDVQc1n9_!!6000000003657-2-tps-2880-1432.png");
+    // background-image: url("https://img.alicdn.com/imgextra/i3/O1CN018YDlO91csxDVQc1n9_!!6000000003657-2-tps-2880-1432.png");
+    background-color: #f1f2f5 ; 
     display: flex;
     width: 100%;
     background-position: top;
@@ -1106,7 +1107,7 @@ $chartColor: #3b5998;
     margin: 10px;
     line-height: 25px;
     font-weight: 500;
-    color: #fff;
+    color: #222;
   }
 
   .copyright-text {
