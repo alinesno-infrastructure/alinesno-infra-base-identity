@@ -40,7 +40,6 @@ public class SaTokenConfigure {
 
         // 配置：未登录时返回的View
         sso.setNotLoginView(() -> {
-//			return new ModelAndView("sa-login.html");
             return new ModelAndView("index.html");
         });
 

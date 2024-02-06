@@ -15,6 +15,7 @@ const useUserStore = defineStore(
       // 登录
       login(userInfo) {
         const username = userInfo.username.trim()
+        const loginType = userInfo.loginType
         const password = userInfo.password
         const code = userInfo.code
         const uuid = userInfo.uuid
@@ -23,7 +24,7 @@ const useUserStore = defineStore(
         const phoneCode = userInfo.phoneCode
 
         return new Promise((resolve, reject) => {
-          login(username , password , code , uuid , 'sms' , phoneNumber , phoneCode) .then(res => {
+          login(username , password , code , uuid , loginType , phoneNumber , phoneCode) .then(res => {
 
             setSaToken(res.data) // 设置SaToken
 

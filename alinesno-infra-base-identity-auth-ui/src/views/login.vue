@@ -236,12 +236,12 @@ const smsLoginEnabled = ref(true);
 
 const loginForm = ref({
   loginType: smsLoginEnabled.value  ,
-  phoneNumber: "12345678901",
-  phoneCode: "7653",
-  username: "admin",
-  password: "admin123",
+  phoneNumber: "",
+  phoneCode: "",
+  username: "",
+  password: "",
   rememberMe: false,
-  code: "9",
+  code: "",
   uuid: ""
 });
 
@@ -309,7 +309,7 @@ function handleLogin() {
         Cookies.set("password", encrypt(loginForm.value.password), { expires: 30 });
         Cookies.set("rememberMe", loginForm.value.rememberMe, { expires: 30 });
 
-        Cookies.set("phoneNumber", loginForm.value.phoneNumber, { expires: 30 });
+        Cookies.set("phoneNumber", encrypt(loginForm.value.phoneNumber), { expires: 30 });
         Cookies.set("phoneCode", loginForm.value.phoneCode, { expires: 30 });
       } else {
         // 否则移除
@@ -320,6 +320,9 @@ function handleLogin() {
         Cookies.remove("phoneNumber");
         Cookies.remove("phoneCode");
       }
+      loginForm.value.loginType = smsLoginEnabled.value?'sms':'account' ;
+
+      console.log('loginForm.value = ' + JSON.stringify(loginForm.value));
 
       // 调用action的登录方法
       userStore.login(loginForm.value).then((res) => {
@@ -362,11 +365,17 @@ function getCode() {
 
 function getCookie() {
 
+  const phoneNumber = Cookies.get("phoneNumber");
+  const phoneCode = Cookies.get("phoneCode");
+
   const username = Cookies.get("username");
   const password = Cookies.get("password");
   const rememberMe = Cookies.get("rememberMe");
 
   loginForm.value = {
+    phoneNumber: phoneNumber === undefined ? loginForm.value.phoneNumber : decrypt(phoneNumber),
+    phoneCode: phoneCode === undefined ? loginForm.value.phoneCode : phoneCode,
+
     username: username === undefined ? loginForm.value.username : username,
     password: password === undefined ? loginForm.value.password : decrypt(password),
     rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
