@@ -1,5 +1,6 @@
 package com.alinesno.infra.base.identity.auth.event.stream;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.stream.Record;
@@ -19,7 +20,7 @@ public class RedisStreamPushUtils {
      * @param topic
      */
     public void pushTask(Object msgContext , String topic){
-        stringRedisTemplate.opsForStream().add(Record.of(msgContext).withStreamKey(topic));
+        stringRedisTemplate.opsForStream().add(Record.of(JSONObject.toJSONString(msgContext)).withStreamKey(topic));
         log.info("{}已发送消息:{}", topic,msgContext);
     }
 
