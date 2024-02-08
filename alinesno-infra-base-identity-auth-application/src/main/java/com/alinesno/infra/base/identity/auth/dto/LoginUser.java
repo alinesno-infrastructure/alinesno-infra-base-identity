@@ -3,16 +3,10 @@ package com.alinesno.infra.base.identity.auth.dto;
 import cn.dev33.satoken.context.model.SaRequest;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.Map;
-import java.util.Objects;
 
 @Slf4j
 @AllArgsConstructor
@@ -20,6 +14,9 @@ import java.util.Objects;
 @Data
 public class LoginUser {
 
+    public static final LoginUser ANON_USER = new LoginUser();
+
+    private long userId ;
     private String loginType;
     private String phoneNumber;
     private String phoneCode;

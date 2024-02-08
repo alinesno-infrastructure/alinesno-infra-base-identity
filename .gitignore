@@ -49,5 +49,6 @@ node
 dist
 node_modules
 
-/.vertx/
+.vertx
 
+package-lock.json
