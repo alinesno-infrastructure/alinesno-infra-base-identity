@@ -23,8 +23,8 @@ public interface ManagerAccountConsumer {
      * @param data
      * @return
      */
-    @Post(url = "/v1/api/base/authority/account/registAccount")
-    ManagerAccountDto registAccount(@Body ManagerAccountDto data);
+    @Post(url = "/v1/api/base/authority/account/registerAccount")
+    ManagerAccountDto registerAccount(@Body ManagerAccountDto data);
 
     /**
      * 账户登陆
