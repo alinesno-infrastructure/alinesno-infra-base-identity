@@ -18,7 +18,7 @@ public class RedisStreamPushUtils {
      * @param msgContext
      * @param topic
      */
-    public void pushTask(String msgContext , String topic){
+    public void pushTask(Object msgContext , String topic){
         stringRedisTemplate.opsForStream().add(Record.of(msgContext).withStreamKey(topic));
         log.info("{}已发送消息:{}", topic,msgContext);
     }

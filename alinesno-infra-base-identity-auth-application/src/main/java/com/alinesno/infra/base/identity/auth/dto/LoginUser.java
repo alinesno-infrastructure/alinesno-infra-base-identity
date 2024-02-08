@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 public class LoginUser {
 
-    public static final LoginUser ANON_USER = new LoginUser();
+    public static final LoginUser ANON_USER = new LoginUser(0l , "anon_user");
 
     private long userId ;
     private String loginType;
@@ -27,6 +27,11 @@ public class LoginUser {
     private String uuid;
 
     private static Gson gson = new Gson();
+
+    public LoginUser(long userId, String username) {
+        this.userId = userId ;
+        this.username = username ;
+    }
 
     public static LoginUser convertParamListToUser(SaRequest request) {
 
