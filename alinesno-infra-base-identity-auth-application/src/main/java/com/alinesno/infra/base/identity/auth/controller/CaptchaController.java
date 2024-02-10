@@ -5,6 +5,8 @@ import com.alinesno.infra.base.identity.adapter.BaseNoticeConsumer;
 import com.alinesno.infra.base.identity.adapter.dto.SmsSendDto;
 import com.alinesno.infra.base.identity.constants.AuthConstants;
 import com.alinesno.infra.common.core.cache.RedisUtils;
+import com.alinesno.infra.common.core.constants.CacheConstants;
+import com.alinesno.infra.common.core.constants.Constants;
 import com.alinesno.infra.common.facade.response.AjaxResult;
 import com.alinesno.infra.common.web.adapter.utils.IdUtils;
 import com.google.code.kaptcha.Producer;
@@ -66,6 +68,7 @@ public class CaptchaController {
 
         // 保存验证码信息
         String uuid = IdUtils.simpleUUID();
+        String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + uuid;
 
         String capStr;
         BufferedImage image;
@@ -74,6 +77,8 @@ public class CaptchaController {
         String capText = captchaProducerMath.createText();
         capStr = capText.substring(0, capText.lastIndexOf("@"));
         image = captchaProducerMath.createImage(capStr);
+
+        RedisUtils.setCacheObject(verifyKey, capStr, Duration.ofMinutes(Constants.CAPTCHA_EXPIRATION));
 
         // 转换流信息写出
         FastByteArrayOutputStream os = new FastByteArrayOutputStream();
