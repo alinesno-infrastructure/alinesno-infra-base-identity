@@ -50,6 +50,18 @@ export function logout() {
   })
 }
 
+// 获取注册验证码
+export function getRegistCode() {
+  return request({
+    url: '/registerCode',
+    headers: {
+      isToken: false
+    },
+    method: 'get',
+    timeout: 20000
+  })
+}
+
 // 获取验证码
 export function getCodeImg() {
   return request({

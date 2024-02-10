@@ -2,10 +2,7 @@ package com.alinesno.infra.base.identity.adapter;
 
 import com.alinesno.infra.base.authority.gateway.dto.ManagerAccountDto;
 import com.alinesno.infra.base.identity.adapter.dto.LoginParamDto;
-import com.dtflys.forest.annotation.BaseRequest;
-import com.dtflys.forest.annotation.Body;
-import com.dtflys.forest.annotation.Headers;
-import com.dtflys.forest.annotation.Post;
+import com.dtflys.forest.annotation.*;
 
 /**
  * 账户接口
@@ -34,4 +31,11 @@ public interface ManagerAccountConsumer {
     @Post(url = "/v1/api/base/authority/account/login")
     ManagerAccountDto loginAccount(@Body LoginParamDto data);
 
+    /**
+     * 根据用户登陆名查询用户
+     * @param loginName
+     * @return
+     */
+    @Post(url = "/v1/api/base/authority/account/findByLoginName")
+    ManagerAccountDto findByLoginName(@Query String loginName);
 }

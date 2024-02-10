@@ -16,12 +16,11 @@ import com.alinesno.infra.base.identity.constants.AuthConstants;
 import com.alinesno.infra.base.identity.entity.LoginRecordEntity;
 import com.dtflys.forest.Forest;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 @Component
@@ -54,11 +53,7 @@ public class SaTokenConfigure {
             dto.setUsername(loginUser.getUsername());
             dto.setPassword(loginUser.getPassword());
 
-            ManagerAccountDto accountDto = accountConsumer.loginAccount(dto) ;
-            log.debug("accountDto = {}" , JSONObject.toJSONString(accountDto));
-
-            // 此处仅做模拟登录，真实环境应该查询数据进行登录
-            StpUtil.login(accountDto.getId());
+            ManagerAccountDto accountDto = getManagerAccountDto(loginUser, dto);
 
             log.debug("isLogin = {}" , StpUtil.isLogin());
 
@@ -83,6 +78,40 @@ public class SaTokenConfigure {
                 return null;
             }
         });
+    }
+
+    /**
+     * 判断用户是否注册，如果没有则注册则自动注册
+     * @param loginUser
+     * @param dto
+     * @return
+     */
+    @NotNull
+    private ManagerAccountDto getManagerAccountDto(LoginUser loginUser, LoginParamDto dto) {
+        // 判断用户是否已经存在，如果没有存在，则自动注册
+        ManagerAccountDto accountDto = accountConsumer.findByLoginName(loginUser.getUsername()) ;
+        if(accountDto == null){
+
+            accountDto = new ManagerAccountDto() ;
+
+            String loginName = dto.getUsername() ;
+            String password = dto.getPassword() ;
+            String phone = dto.getUsername() ;
+
+            accountDto.setLoginName(loginName);
+            accountDto.setPassword(password);
+            accountDto.setPhone(phone);
+
+            accountConsumer.registerAccount (accountDto) ;
+        }
+
+        // 获取登陆用户
+        accountDto = accountConsumer.loginAccount(dto) ;
+        log.debug("accountDto = {}" , JSONObject.toJSONString(accountDto));
+
+        // 此处仅做模拟登录，真实环境应该查询数据进行登录
+        StpUtil.login(accountDto.getId());
+        return accountDto;
     }
 
     /**

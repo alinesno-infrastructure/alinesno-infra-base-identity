@@ -216,7 +216,7 @@
 </template>
 
 <script setup>
-import { getCodeImg ,login , getRedirectUrl } from "@/api/login";
+import { getCodeImg ,login , getRedirectUrl , getRegistCode } from "@/api/login";
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from "@/utils/jsencrypt";
 import { getParam } from "@/utils/ruoyi" ;
@@ -279,8 +279,9 @@ const getPhoneCode = async() => {
 
   phoneCodeEnabled.value = false ;
 
-  // TODO 获取验证码
-  // const res = await getCode(mobile.value, "login");
+  // 获取验证码
+  const res = await getRegistCode(loginForm.value.username) ; 
+  console.log('res = ' + res);
 
   timer.value = 60 ;
 
@@ -397,9 +398,6 @@ function checkHasLogin(){
     console.log('res = ' + res) ;
 
     if(res.sso_login) {
-
-      debugger
-
       // 已登录，并且redirect地址有效，开始跳转
       location.href = decodeURIComponent(res.data);
     } else if(res.code == 401) {
