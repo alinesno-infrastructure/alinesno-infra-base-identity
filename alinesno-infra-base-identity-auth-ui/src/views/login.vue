@@ -1,14 +1,14 @@
 <template>
-  <el-container class="login-container">
+  <el-container class="login-container" v-loading="initLoading">
     <el-header style="z-index: 100;height: 45px;background: #fff;border-bottom: 1px solid #e5e5e5;">
       <div>
         <div style="float: left;font-size: 30px;color:#fff;margin-top: 5px;">
           <img :src="homeLogo" style="width:35px" alt="">
         </div>
         <div class="banner-text">
-          单点登陆服务
+          {{ identityInfoPanel.systemName }}
         </div>
-        <a href="http://portal.infra.linesno.com/"
+        <a :href="identityInfoPanel.portalSite"
            target="_blank"
            style="float: right;font-weight: 500;font-size: 13px;margin-top: 14px;color:#222;">
           <i class="fas fa-link"></i> 官网
@@ -21,8 +21,12 @@
 
         <div class="marketing-wrapper">
           <div class="title-header">
-            <span class="main-title">用户一次可通过一组登录凭证登入会话,在该次会话期间无需再次登录</span>
-            <span class="sub-title">可安全访问多个相关的应用和服务</span>
+            <span class="main-title">
+              {{ identityInfoPanel.bannerInfo }}
+            </span>
+            <span class="sub-title">可安全访问多个相关的应用和服务
+            
+            </span>
           </div>
         </div>
 
@@ -209,8 +213,8 @@
         </div>
       </div>
     </el-main>
-    <el-footer style="background: rgb(250, 250, 250);position: fixed;bottom: 0px;width: 100%;height: 45px;">
-      <div class="copyright-text">© 2009-2023 portal.infra.linesno.com 版权所有 ICP证：桂ICP备15005934号-1</div>
+    <el-footer style="background: rgb(250, 250, 250);bottom: 0px;width: 100%;height: 45px;">
+      <div class="copyright-text">© {{ identityInfoPanel.copyrightYear }} {{ identityInfoPanel.copyrightLabel }}</div>
     </el-footer>
   </el-container>
 </template>
@@ -227,7 +231,11 @@ import loginQrcode from '@/assets/logo/loginQrcode.png'
 import { setSaToken } from '@/utils/auth'
 
 import useUserStore from '@/store/modules/user'
+import useIdentityInfoStore from '@/store/modules/info'
+
 const userStore = useUserStore()
+const identityInfoStore = useIdentityInfoStore()
+
 const router = useRouter();
 
 const { proxy } = getCurrentInstance();
@@ -246,6 +254,16 @@ const loginForm = ref({
   uuid: ""
 });
 
+// 登陆信息
+const identityInfoPanel = ref({
+  systemName: "",
+  bannerInfo: "",
+  version: "",
+  copyrightYear: "",
+  copyrightLabel: "",
+  portalSite: "" 
+})
+
 const loginRules = {
   phoneCode: [{ required: true, trigger: "blur", message: "请输入您的手机验证码" }],
   phoneNumber: [{ required: true, trigger: "blur", message: "请输入您的手机号" }],
@@ -255,6 +273,7 @@ const loginRules = {
 };
 
 const codeUrl = ref("");
+const initLoading = ref(false);
 const loading = ref(false);
 // 验证码开关
 const captchaEnabled = ref(true);
@@ -274,6 +293,11 @@ const redirect = ref(undefined);
 const getPhoneCode = async() => {
 
   if (timer.value > 0){
+    return;
+  }
+
+  if (loginForm.value.username){
+    proxy.$refs.loginRef.validateField("phoneNumber");
     return;
   }
 
@@ -410,9 +434,28 @@ function checkHasLogin(){
 
 }
 
+// 获取到系统信息，即当前登陆界面信息
+function getIdentityInfo(){
+  initLoading.value = true ;
+
+  identityInfoStore.getIdentityInfo().then(res => {
+    initLoading.value = false;
+
+    console.log('res = ' + res) ;
+
+    identityInfoPanel.value = res.data ;
+
+    console.log('identityInfoPanel = ' + identityInfoPanel.value.systemName)
+
+  }).catch((err) => {
+    initLoading.value = false;
+  })
+
+}
+
+getIdentityInfo() ;
 getCode();
 getCookie();
-
 checkHasLogin();
 
 </script>

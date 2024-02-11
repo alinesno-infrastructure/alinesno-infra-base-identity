@@ -42,6 +42,14 @@ export function getInfo() {
   })
 }
 
+// 获取系统详细信息
+export function getIdentityInfo(){
+  return request({
+    url: '/identityInfo',
+    method: 'get'
+  })
+}
+
 // 退出方法
 export function logout() {
   return request({
