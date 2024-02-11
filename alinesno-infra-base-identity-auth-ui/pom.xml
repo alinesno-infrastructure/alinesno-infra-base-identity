@@ -43,6 +43,7 @@
                             <yarnVersion>v1.22.10</yarnVersion>
                         </configuration>
                     </execution>
+                    <!-- 配置下载地址
                     <execution>
                         <id>yarn set registry</id>
                         <goals>
@@ -52,6 +53,7 @@
                             <arguments>config set registry ${npm.registry.url}</arguments>
                         </configuration>
                     </execution>
+                    -->
                     <execution>
                         <id>yarn install</id>
                         <goals>
