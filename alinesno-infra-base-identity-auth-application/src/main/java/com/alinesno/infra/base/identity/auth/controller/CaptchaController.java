@@ -58,10 +58,10 @@ public class CaptchaController {
         // 保存验证码信息
         String verifyKey = AuthConstants.PHONE_CODE_KEY +  phone;
 
-//        SmsSendDto smsSendDto = SmsSendDto.getSmsRegisterSendDto(phone , phoneCode) ;
-//        AjaxResult result = baseNoticeConsumer.smsSendMessageMap(smsSendDto) ;
-//
-//        log.debug("sendMessagePhoneCode = {} , result = {}" , phone + ":" + phoneCode ,result);
+        SmsSendDto smsSendDto = SmsSendDto.getSmsRegisterSendDto(phone , phoneCode) ;
+        AjaxResult result = baseNoticeConsumer.smsSendMessageMap(smsSendDto) ;
+
+        log.debug("sendMessagePhoneCode = {} , result = {}" , phone + ":" + phoneCode ,result);
 
         RedisUtils.setCacheObject(verifyKey, phoneCode, Duration.ofMinutes(AuthConstants.PHONE_CODE_EXPIRATION));
 
