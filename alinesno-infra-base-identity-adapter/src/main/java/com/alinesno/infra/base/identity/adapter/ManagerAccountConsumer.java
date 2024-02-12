@@ -36,6 +36,6 @@ public interface ManagerAccountConsumer {
      * @param loginName
      * @return
      */
-    @Post(url = "/v1/api/base/authority/account/findByLoginName")
-    ManagerAccountDto findByLoginName(@Query String loginName);
+    @Get(url = "/v1/api/base/authority/account/findByLoginName")
+    ManagerAccountDto findByLoginName(@Query("loginName") String loginName);
 }

@@ -47,8 +47,6 @@ public class SaTokenConfigure {
             LoginUser loginUser = LoginUser.convertParamListToUser(SaHolder.getRequest()) ;
             log.debug("loginUser = {}" , loginUser) ;
 
-            validateLoginKey(loginUser) ;  // 验证登陆信息是否正确
-
             BaseLoginStrategy loginStrategy = (BaseLoginStrategy) SpringContext.getBean(loginUser.getLoginType() + "LoginStrategy");
             ManagerAccountDto accountDto = loginStrategy.doLogin(loginUser) ;
 
@@ -77,14 +75,6 @@ public class SaTokenConfigure {
                 return null;
             }
         });
-    }
-
-    /**
-     * 验证登陆是否正确，验证手机验证码和界面验证码
-     * @param loginUser
-     */
-    private void validateLoginKey(LoginUser loginUser) {
-
     }
 
     /**

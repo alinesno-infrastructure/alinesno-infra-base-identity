@@ -305,7 +305,7 @@ const getPhoneCode = async() => {
   phoneCodeEnabled.value = false ;
   // 获取验证码
   
-  getRegistCode(loginForm.value.phoneNumber).then(res => {
+  getRegistCode(loginForm.value.phoneNumber , loginForm.value.code , loginForm.value.uuid).then(res => {
     console.log('res = ' + res);
 
     ElMessage({
@@ -328,7 +328,7 @@ const getPhoneCode = async() => {
     }, 1000);
   }).catch(err => {
       phoneCodeEnabled.value = true;
-      ElMessage.error('验证码发送异常，请一分钟后重试.') ; 
+      // ElMessage.error('验证码发送异常，请一分钟后重试.') ; 
   })
 
 }

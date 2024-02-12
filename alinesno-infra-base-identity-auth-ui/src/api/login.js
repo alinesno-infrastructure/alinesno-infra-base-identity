@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import { parseStrEmpty } from "@/utils/ruoyi"
 
 // 登录方法
 export function login(username, password, code, uuid , loginType , phoneNumber , phoneCode) {
@@ -59,9 +60,9 @@ export function logout() {
 }
 
 // 获取注册验证码
-export function getRegistCode(phone) {
+export function getRegistCode(phone , code , uuid) {
   return request({
-    url: '/registerCode?phone=' + phone,
+    url: '/registerCode?phone=' + parseStrEmpty(phone) + '&code=' + parseStrEmpty(code) + '&uuid=' + parseStrEmpty(uuid),
     headers: {
       isToken: false
     },

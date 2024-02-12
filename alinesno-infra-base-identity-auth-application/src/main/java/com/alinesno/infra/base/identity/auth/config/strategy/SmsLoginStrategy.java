@@ -1,9 +1,12 @@
 package com.alinesno.infra.base.identity.auth.config.strategy;
 
+import com.alibaba.fastjson.JSONObject;
 import com.alinesno.infra.base.authority.gateway.dto.ManagerAccountDto;
 import com.alinesno.infra.base.identity.adapter.ManagerAccountConsumer;
+import com.alinesno.infra.base.identity.adapter.dto.LoginParamDto;
 import com.alinesno.infra.base.identity.auth.config.BaseLoginStrategy;
 import com.alinesno.infra.base.identity.auth.dto.LoginUser;
+import com.alinesno.infra.common.web.adapter.utils.MD5Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,22 +27,32 @@ public class SmsLoginStrategy extends BaseLoginStrategy {
         log.debug("手机验证码登陆.");
 
         // 判断用户是否已经存在，如果没有存在，则自动注册
-        ManagerAccountDto accountDto = accountConsumer.findByLoginName(loginUser.getUsername()) ;
+        ManagerAccountDto accountDto = accountConsumer.findByLoginName(loginUser.getPhoneNumber()) ;
         if(accountDto == null){
 
             accountDto = new ManagerAccountDto() ;
 
             String loginName = loginUser.getPhoneNumber() ;
-            String password = loginUser.getPhoneCode() ;
+            String password = MD5Util.encode(loginUser.getPhoneNumber()) ;  // 设置临时密码
             String phone = loginUser.getPhoneNumber() ;
 
             accountDto.setLoginName(loginName);
             accountDto.setPassword(password);
             accountDto.setPhone(phone);
 
-            accountConsumer.registerAccount (accountDto) ;
+            accountConsumer.registerAccount(accountDto) ;
         }
 
-        return null;
+        // 获取登陆用户
+        LoginParamDto dto = new LoginParamDto() ;
+        dto.setUsername(loginUser.getPhoneNumber());
+        dto.setPassword(MD5Util.encode(loginUser.getPhoneNumber()));
+
+        accountDto = accountConsumer.loginAccount(dto) ;
+        log.debug("accountDto = {}" , JSONObject.toJSONString(accountDto));
+
+//        return accountDto;
+
+        return null ;
     }
 }
