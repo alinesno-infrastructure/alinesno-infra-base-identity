@@ -17,8 +17,8 @@ public class SmsSendDto {
 
     private Map<String , String> messageMap ;
 
-    public static SmsSendDto getSmsDto(String phone , String phoneCode){
-        return new SmsSendDto(phone , "alibaba" , phoneCode) ;
+    public static SmsSendDto getSmsRegisterSendDto(String phone , String phoneCode){
+        return new SmsSendDto(phone , "alibaba-register" , phoneCode) ;
     }
 
     public SmsSendDto(String phone, String configId, String phoneCode) {

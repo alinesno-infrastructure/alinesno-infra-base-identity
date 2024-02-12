@@ -220,6 +220,7 @@
 </template>
 
 <script setup>
+import { ElMessage } from 'element-plus'
 import { getCodeImg ,login , getRedirectUrl , getRegistCode } from "@/api/login";
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from "@/utils/jsencrypt";
@@ -296,30 +297,39 @@ const getPhoneCode = async() => {
     return;
   }
 
-  if (loginForm.value.username){
+  if (!loginForm.value.phoneNumber){
     proxy.$refs.loginRef.validateField("phoneNumber");
     return;
   }
 
   phoneCodeEnabled.value = false ;
-
   // 获取验证码
-  const res = await getRegistCode(loginForm.value.username) ; 
-  console.log('res = ' + res);
+  
+  getRegistCode(loginForm.value.phoneNumber).then(res => {
+    console.log('res = ' + res);
 
-  timer.value = 60 ;
+    ElMessage({
+      message: '验证码发送成功，请注意查收短信.',
+      type: 'success',
+    })
 
-  if(clearId){
-    clearInterval(clearId) ;
-  }
+    timer.value = 60 ;
 
-  clearId = setInterval(() => {
-    timer.value--;
-    if (timer.value == 0) {
-      clearInterval(clearId);
-      phoneCodeEnabled.value = true;
+    if(clearId){
+      clearInterval(clearId) ;
     }
-  }, 1000);
+
+    clearId = setInterval(() => {
+      timer.value--;
+      if (timer.value == 0) {
+        clearInterval(clearId);
+        phoneCodeEnabled.value = true;
+      }
+    }, 1000);
+  }).catch(err => {
+      phoneCodeEnabled.value = true;
+      ElMessage.error('验证码发送异常，请一分钟后重试.') ; 
+  })
 
 }
 

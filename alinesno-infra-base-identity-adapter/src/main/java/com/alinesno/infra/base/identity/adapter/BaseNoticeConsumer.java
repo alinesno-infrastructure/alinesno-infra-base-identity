@@ -23,7 +23,7 @@ public interface BaseNoticeConsumer {
      * @param smsSendDto
      * @return
      */
-    @Post(url = "/v1/api/base/notice/sms/sendMessageMap")
+    @Post(url = "/v1/base/notice/sms/sendMessageMap")
     AjaxResult smsSendMessageMap(@Body SmsSendDto smsSendDto);
 
 }

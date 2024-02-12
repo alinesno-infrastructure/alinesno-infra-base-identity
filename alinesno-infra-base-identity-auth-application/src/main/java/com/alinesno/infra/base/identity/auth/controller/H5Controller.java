@@ -44,7 +44,6 @@ public class H5Controller {
 			return result ;
 		}
 
-		// 模式二或模式三
 		String redirectUrl = SaSsoUtil.buildRedirectUrl(StpUtil.getLoginId(), loginDetailsDTO.getClient(), loginDetailsDTO.getRedirect());
 		SaResult result = SaResult.data(redirectUrl);
 

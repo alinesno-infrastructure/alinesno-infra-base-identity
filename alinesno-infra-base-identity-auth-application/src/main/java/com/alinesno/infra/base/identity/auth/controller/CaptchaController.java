@@ -10,6 +10,7 @@ import com.alinesno.infra.common.core.constants.Constants;
 import com.alinesno.infra.common.facade.response.AjaxResult;
 import com.alinesno.infra.common.web.adapter.utils.IdUtils;
 import com.google.code.kaptcha.Producer;
+import io.jsonwebtoken.lang.Assert;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +45,14 @@ public class CaptchaController {
     @GetMapping("/registerCode")
     public AjaxResult registerCode(String phone) {
 
+        Assert.hasLength(phone , "手机号为空");
+
         String phoneCode = String.valueOf((int)((Math.random() * 9 + 1) * Math.pow(10,5)));
 
         // 保存验证码信息
         String verifyKey = AuthConstants.PHONE_CODE_KEY +  phone;
 
-        SmsSendDto smsSendDto = SmsSendDto.getSmsDto(phone , phoneCode) ;
+        SmsSendDto smsSendDto = SmsSendDto.getSmsRegisterSendDto(phone , phoneCode) ;
         AjaxResult result = baseNoticeConsumer.smsSendMessageMap(smsSendDto) ;
 
         log.debug("sendMessagePhoneCode = {} , result = {}" , phone + ":" + phoneCode ,result);

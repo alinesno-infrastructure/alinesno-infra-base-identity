@@ -59,9 +59,9 @@ export function logout() {
 }
 
 // 获取注册验证码
-export function getRegistCode() {
+export function getRegistCode(phone) {
   return request({
-    url: '/registerCode',
+    url: '/registerCode?phone=' + phone,
     headers: {
       isToken: false
     },

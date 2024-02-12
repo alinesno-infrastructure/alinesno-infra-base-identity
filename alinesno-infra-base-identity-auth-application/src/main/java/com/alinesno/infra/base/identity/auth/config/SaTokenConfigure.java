@@ -14,6 +14,8 @@ import com.alinesno.infra.base.identity.auth.event.LoginRecordEvent;
 import com.alinesno.infra.base.identity.auth.event.PublishService;
 import com.alinesno.infra.base.identity.constants.AuthConstants;
 import com.alinesno.infra.base.identity.entity.LoginRecordEntity;
+import com.alinesno.infra.base.identity.enums.LoginTypeEnums;
+import com.alinesno.infra.common.core.context.SpringContext;
 import com.dtflys.forest.Forest;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
@@ -26,9 +28,6 @@ import java.util.concurrent.CompletableFuture;
 @Component
 @Slf4j
 public class SaTokenConfigure {
-
-    @Autowired
-    private ManagerAccountConsumer accountConsumer ;
 
     @Autowired
     private PublishService publishService;
@@ -50,14 +49,12 @@ public class SaTokenConfigure {
 
             validateLoginKey(loginUser) ;  // 验证登陆信息是否正确
 
-            LoginParamDto dto = new LoginParamDto() ;
+            BaseLoginStrategy loginStrategy = (BaseLoginStrategy) SpringContext.getBean(loginUser.getLoginType() + "LoginStrategy");
+            ManagerAccountDto accountDto = loginStrategy.doLogin(loginUser) ;
 
-            dto.setUsername(loginUser.getUsername());
-            dto.setPassword(loginUser.getPassword());
+            log.debug("accountDto = {}" , accountDto);
 
-            ManagerAccountDto accountDto = getManagerAccountDto(loginUser, dto);
-
-            log.debug("isLogin = {}" , StpUtil.isLogin());
+            StpUtil.login(accountDto.getId());
 
             // 设置会话信息
             SaSession session = StpUtil.getSession();
@@ -88,40 +85,6 @@ public class SaTokenConfigure {
      */
     private void validateLoginKey(LoginUser loginUser) {
 
-    }
-
-    /**
-     * 判断用户是否注册，如果没有则注册则自动注册
-     * @param loginUser
-     * @param dto
-     * @return
-     */
-    @NotNull
-    private ManagerAccountDto getManagerAccountDto(LoginUser loginUser, LoginParamDto dto) {
-        // 判断用户是否已经存在，如果没有存在，则自动注册
-        ManagerAccountDto accountDto = accountConsumer.findByLoginName(loginUser.getUsername()) ;
-        if(accountDto == null){
-
-            accountDto = new ManagerAccountDto() ;
-
-            String loginName = dto.getUsername() ;
-            String password = dto.getPassword() ;
-            String phone = dto.getUsername() ;
-
-            accountDto.setLoginName(loginName);
-            accountDto.setPassword(password);
-            accountDto.setPhone(phone);
-
-            accountConsumer.registerAccount (accountDto) ;
-        }
-
-        // 获取登陆用户
-        accountDto = accountConsumer.loginAccount(dto) ;
-        log.debug("accountDto = {}" , JSONObject.toJSONString(accountDto));
-
-        // 此处仅做模拟登录，真实环境应该查询数据进行登录
-        StpUtil.login(accountDto.getId());
-        return accountDto;
     }
 
     /**
