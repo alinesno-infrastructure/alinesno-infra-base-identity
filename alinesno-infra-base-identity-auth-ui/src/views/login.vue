@@ -312,6 +312,7 @@ const getPhoneCode = async() => {
       message: '验证码发送成功，请注意查收短信.',
       type: 'success',
     })
+    getCode();
 
     timer.value = 60 ;
 

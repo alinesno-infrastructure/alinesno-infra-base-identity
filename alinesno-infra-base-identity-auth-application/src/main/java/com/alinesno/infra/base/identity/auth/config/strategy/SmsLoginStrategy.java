@@ -44,15 +44,9 @@ public class SmsLoginStrategy extends BaseLoginStrategy {
         }
 
         // 获取登陆用户
-        LoginParamDto dto = new LoginParamDto() ;
-        dto.setUsername(loginUser.getPhoneNumber());
-        dto.setPassword(MD5Util.encode(loginUser.getPhoneNumber()));
-
-        accountDto = accountConsumer.loginAccount(dto) ;
+        accountDto = accountConsumer.findByLoginName(loginUser.getPhoneNumber()) ;
         log.debug("accountDto = {}" , JSONObject.toJSONString(accountDto));
 
-//        return accountDto;
-
-        return null ;
+        return accountDto;
     }
 }
