@@ -7,6 +7,7 @@ import com.alinesno.infra.base.identity.adapter.dto.LoginParamDto;
 import com.alinesno.infra.base.identity.auth.config.BaseLoginStrategy;
 import com.alinesno.infra.base.identity.auth.dto.LoginUser;
 import com.alinesno.infra.common.web.adapter.utils.MD5Util;
+import com.alinesno.infra.common.web.adapter.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class SmsLoginStrategy extends BaseLoginStrategy {
 
         // 判断用户是否已经存在，如果没有存在，则自动注册
         ManagerAccountDto accountDto = accountConsumer.findByLoginName(loginUser.getPhoneNumber()) ;
-        if(accountDto == null){
+        if(accountDto == null || StringUtils.isBlank(accountDto.getLoginName())){
 
             accountDto = new ManagerAccountDto() ;
 
