@@ -37,14 +37,22 @@
                </el-table-column>
 
                <!-- 业务字段-->
-               <el-table-column label="应用名称" align="center" key="dbName" prop="dbName" v-if="columns[0].visible" />
-               <el-table-column label="应用描述" align="center" key="dbDesc" prop="dbDesc" v-if="columns[1].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="表数据量" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="类型" align="center" key="dbType" prop="dbType" v-if="columns[3].visible" :show-overflow-tooltip="true" />
-               <el-table-column label="应用地址" align="center" key="jdbcUrl" prop="jdbcUrl" v-if="columns[4].visible" width="120" />
-               <el-table-column label="状态" align="center" key="hasStatus" v-if="columns[5].visible" />
+               <el-table-column label="用户ID" align="center" key="userId" prop="userId" v-if="columns[0].visible" />
+               <el-table-column label="访问令牌" align="center" key="accToken" prop="accToken" v-if="columns[1].visible" :show-overflow-tooltip="true" />
+               <el-table-column label="登录IP" align="center" key="loginIp" prop="loginIp" v-if="columns[2].visible" :show-overflow-tooltip="true" />
+               <el-table-column label="登录地址" align="center" key="loginAddress" prop="loginAddress" v-if="columns[3].visible" :show-overflow-tooltip="true" />
+               <el-table-column label="登录设备" align="center" key="loginDevice" prop="loginDevice" v-if="columns[4].visible" width="120" />
+               <el-table-column label="登录系统" align="center" key="loginSystem" prop="loginSystem" v-if="columns[5].visible" />
 
-               <el-table-column label="添加时间" align="center" prop="addTime" v-if="columns[6].visible" width="160">
+               <!-- <el-table-column label="客户端ID" align="center" key="clientId" prop="clientId" v-if="columns[6].visible" /> -->
+               <!-- <el-table-column label="客户端域名" align="center" key="clientDomain" prop="clientDomain" v-if="columns[7].visible" :show-overflow-tooltip="true" /> -->
+               <!-- <el-table-column label="创建时间" align="center" key="createTime" prop="createTime" v-if="columns[8].visible" />
+               <el-table-column label="系统用户用户名" align="center" key="sysUserUsername" prop="sysUserUsername" v-if="columns[9].visible" />
+               <el-table-column label="系统用户头像" align="center" key="sysUserAvatar" prop="sysUserAvatar" v-if="columns[10].visible" />
+               <el-table-column label="系统客户端名称" align="center" key="sysClientName" prop="sysClientName" v-if="columns[11].visible" />
+               <el-table-column label="系统客户端标识" align="center" key="sysClientLogo" prop="sysClientLogo" v-if="columns[12].visible" /> -->
+
+               <el-table-column label="登陆时间" align="center" prop="addTime" v-if="columns[6].visible" width="160">
                   <template #default="scope">
                      <span>{{ parseTime(scope.row.addTime) }}</span>
                   </template>
@@ -152,32 +160,65 @@ const roleOptions = ref([]);
 
 // 列显隐信息
 const columns = ref([
-   { key: 0, label: `应用名称`, visible: true },
-   { key: 1, label: `应用描述`, visible: true },
-   { key: 2, label: `表数据量`, visible: true },
-   { key: 3, label: `类型`, visible: true },
-   { key: 4, label: `应用地址`, visible: true },
-   { key: 5, label: `状态`, visible: true },
-   { key: 6, label: `更新时间`, visible: true }
+    { key: 0, label: `用户ID`, visible: true },
+    { key: 1, label: `访问令牌`, visible: true },
+    { key: 2, label: `登录IP`, visible: true },
+    { key: 3, label: `登录地址`, visible: true },
+    { key: 4, label: `登录设备`, visible: true },
+    { key: 5, label: `登录系统`, visible: true },
+    { key: 6, label: `客户端ID`, visible: true },
+    { key: 7, label: `客户端域名`, visible: true },
+    { key: 8, label: `创建时间`, visible: true },
+    { key: 9, label: `系统用户用户名`, visible: true },
+    { key: 10, label: `系统用户头像`, visible: true },
+    { key: 11, label: `系统客户端名称`, visible: true },
+    { key: 12, label: `系统客户端标识`, visible: true }
 ]);
 
 const data = reactive({
-   form: {},
-   queryParams: {
-      pageNum: 1,
-      pageSize: 10,
-      dbName: undefined,
-      dbDesc: undefined
-   },
-   rules: {
-      dbName: [{ required: true, message: "名称不能为空", trigger: "blur" }] , 
-      jdbcUrl: [{ required: true, message: "连接不能为空", trigger: "blur" }],
-      dbType: [{ required: true, message: "类型不能为空", trigger: "blur" }] , 
-      dbUsername: [{ required: true , message: "用户名不能为空", trigger: "blur"}],
-      dbPasswd: [{ required: true, message: "密码不能为空", trigger: "blur" }] , 
-      dbDesc: [{ required: true, message: "备注不能为空", trigger: "blur" }] 
-   }
+    form: {},
+    queryParams: {
+        pageNum: 1,
+        pageSize: 10,
+        dbName: undefined,
+        dbDesc: undefined,
+        userId: undefined,
+        accToken: undefined,
+        loginIp: undefined,
+        loginAddress: undefined,
+        loginDevice: undefined,
+        loginSystem: undefined,
+        clientId: undefined,
+        clientDomain: undefined,
+        createTime: undefined,
+        sysUserUsername: undefined,
+        sysUserAvatar: undefined,
+        sysClientName: undefined,
+        sysClientLogo: undefined
+    },
+    rules: {
+        dbName: [{ required: true, message: "名称不能为空", trigger: "blur" }] , 
+        jdbcUrl: [{ required: true, message: "连接不能为空", trigger: "blur" }],
+        dbType: [{ required: true, message: "类型不能为空", trigger: "blur" }] , 
+        dbUsername: [{ required: true , message: "用户名不能为空", trigger: "blur"}],
+        dbPasswd: [{ required: true, message: "密码不能为空", trigger: "blur" }] , 
+        dbDesc: [{ required: true, message: "备注不能为空", trigger: "blur" }] ,
+        userId: [{ required: true, message: "用户ID不能为空", trigger: "blur" }] ,
+        accToken: [{ required: true, message: "访问令牌不能为空", trigger: "blur" }] ,
+        loginIp: [{ required: true, message: "登录IP不能为空", trigger: "blur" }] ,
+        loginAddress: [{ required: true, message: "登录地址不能为空", trigger: "blur" }] ,
+        loginDevice: [{ required: true, message: "登录设备不能为空", trigger: "blur" }] ,
+        loginSystem: [{ required: true, message: "登录系统不能为空", trigger: "blur" }] ,
+        clientId: [{ required: true, message: "客户端ID不能为空", trigger: "blur" }] ,
+        clientDomain: [{ required: true, message: "客户端域名不能为空", trigger: "blur" }] ,
+        createTime: [{ required: true, message: "创建时间不能为空", trigger: "blur" }] ,
+        sysUserUsername: [{ required: true, message: "系统用户用户名不能为空", trigger: "blur" }] ,
+        sysUserAvatar: [{ required: true, message: "系统用户头像不能为空", trigger: "blur" }] ,
+        sysClientName: [{ required: true, message: "系统客户端名称不能为空", trigger: "blur" }] ,
+        sysClientLogo: [{ required: true, message: "系统客户端标识不能为空", trigger: "blur" }]
+    }
 });
+
 
 const { queryParams, form, rules } = toRefs(data);
 

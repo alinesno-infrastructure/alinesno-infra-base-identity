@@ -98,9 +98,9 @@ export const constantRoutes = [
         meta: { title: '认证配置', icon: 'dashboard', affix: true }
       }, 
       {
-        path: '/base/identity/security/index',
-        component: () => import('@/views/base/identity/security/index'),
-        name: '/base/identity/security/index',
+        path: '/base/identity/enterprise/index',
+        component: () => import('@/views/base/identity/enterprise/index'),
+        name: '/base/identity/enterprise/index',
         meta: { title: '企业配置', icon: 'dashboard', affix: true }
       }, 
       {

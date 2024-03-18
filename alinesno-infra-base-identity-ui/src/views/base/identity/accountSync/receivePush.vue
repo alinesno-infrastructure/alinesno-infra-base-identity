@@ -2,7 +2,7 @@
    <div class="app-container">
     <div class="label-title">
       <div class="tip">接收推送用户数据</div>
-      <div class="sub-tip">根据企业和团队自定义单点登陆配置</div>
+      <div class="sub-tip">接收从外部发送过来的用户数据信息</div>
     </div>
     <div class="form-container" >
       <el-form
@@ -14,36 +14,27 @@
         class="demo-form"
       >
 
-        <el-form-item label="品牌代码" prop="themeCode">
-          <el-input type="input" show-word-limit v-model="form.themeCode" readonly placeholder="请输入主题代码">
+        <el-form-item label="推送服务名称" prop="themeCode">
+          <el-input type="input" show-word-limit v-model="form.themeCode" readonly placeholder="请输入推送服务名称">
             <el-button slot="append" @click="configTheme()" icon="el-icon-edit">配置品牌</el-button>
           </el-input>
         </el-form-item>
 
-        <el-form-item label="接收从其它系统推送数据">
+        <el-form-item label="允许接收推送数据">
           <el-switch v-model="form.enableSociety"
             :active-value="1"
             :inactive-value="0"
           ></el-switch>
         </el-form-item>
 
-        <el-form-item label="错误次数" prop="errorCount">
-          <el-input-number type="input" maxlength="500" :min="1" :max="10" show-word-limit v-model="form.errorCount" >
-              <template slot="append">次</template>
-          </el-input-number>
-        </el-form-item>
-
-        <el-form-item label="锁定时长" prop="lockTime">
-          <el-input-number type="input" maxlength="500" show-word-limit v-model="form.lockTime" >
-              <template slot="append">分钟</template>
-          </el-input-number>
-        </el-form-item>
-
-        <el-form-item label="显示忘记密码">
-          <el-switch v-model="form.enableFindPwd"
-            :active-value="1"
-            :inactive-value="0"
-          ></el-switch>
+        <el-form-item label="推送规则" prop="status">
+            <el-radio-group v-model="form.status">
+              <el-radio
+                  v-for="dict in sys_normal_disable"
+                  :key="dict.value"
+                  :label="dict.value"
+              >{{ dict.label }}</el-radio>
+            </el-radio-group>
         </el-form-item>
 
         <el-form-item label="允许推送的 IP" prop="defaultIndex">
@@ -72,121 +63,50 @@
   </div>
 </template>
 
-<script>
+<script setup>
 
-//   import {
-//     addLoginSetting,
-//     updateLoginSetting,
-//     getCurrentConfig } from "@/api/business/OauthLoginSetting";
+const { proxy } = getCurrentInstance();
+const { sys_normal_disable } = proxy.useDict("sys_normal_disable") ; 
 
-//   import ImageUpload from "alinesno-ui/packages/ImageUpload"
+const theme = ref(null) ;
+const form = ref({
+    themeCode: null , 
+    loginStyle:'1' ,
+    enableSociety: '1' ,
+    enableFindPwd: '1' ,
+    logoImg: '' ,
+    lockTime: 250 ,
+    errorCount: 5,
+    defaultIndex: '' , 
+    enableValidate: '1',
+  }) ;
 
-  export default {
+  // 表单参数
+const rules = ref({
+    logoTitle: [
+      { required: true, message: "请输入登陆标题", trigger: "blur" },
+    ],
+    logoTitle: [
+      { required: true, message: "请输入登陆标题", trigger: "blur" },
+    ],
+    loginDescription: [
+      { required: true, message: "请输入登陆描述", trigger: "blur" },
+    ],
+    loginLogo: [
+      { required: true, message: "请至少上传一张Logo图", trigger: "blur" },
+    ],
+    logoBackgroun: [
+      { required: true, message: "请至少上传一张背景图", trigger: "blur" },
+    ],
+    defaultIndex: [
+      { required: true, message: "请输入默认主页", trigger: "blur" },
+      { type: 'url',message: "请输入正确的链接地址",trigger: 'blur'},
+    ],
+  }) ;
 
-   //  components:{
-   //    ImageUpload
-   //  },
-    data() {
-      return {
-        loginStyle:[
-          {id:'1' , icon:'asserts/images/style-01.png' , desc:'经典版本的登陆UI，提供更加流畅的交互体验'} ,
-          {id:'2' , icon:'asserts/images/style-02.png' , desc:'简洁版的登陆，优化登录注册页面设计，PC视觉更简洁'} ,
-          {id:'3' , icon:'asserts/images/style-03.png' , desc:'平台版本的登陆界面，大气简洁的登陆界面，更贴近平台化'} ,
-        ],
-        theme: null , 
-        form: {
-          themeCode: null , 
-          loginStyle:'1' ,
-          enableSociety: '1' ,
-          enableFindPwd: '1' ,
-          logoImg: '' ,
-          lockTime: 250 ,
-          errorCount: 5,
-          defaultIndex: '' , 
-          enableValidate: '1',
-        },
-        // 表单参数
-        rules: {
-          logoTitle: [
-            { required: true, message: "请输入登陆标题", trigger: "blur" },
-          ],
-          logoTitle: [
-            { required: true, message: "请输入登陆标题", trigger: "blur" },
-          ],
-          loginDescription: [
-            { required: true, message: "请输入登陆描述", trigger: "blur" },
-          ],
-          loginLogo: [
-            { required: true, message: "请至少上传一张Logo图", trigger: "blur" },
-          ],
-          logoBackgroun: [
-            { required: true, message: "请至少上传一张背景图", trigger: "blur" },
-          ],
-          defaultIndex: [
-            { required: true, message: "请输入默认主页", trigger: "blur" },
-            { type: 'url',message: "请输入正确的链接地址",trigger: 'blur'},
-          ],
-        },
-        currentSiteId: null,
-        // 遮罩层
-        loading: false ,
-      };
-    },
-    created(){
-      // this.getSetting();
-    },
-    methods: {
-      // getSetting(){
-      //   getCurrentConfig().then(response => {
+// 遮罩层
+const loading = ref(false);
 
-      //     if(response.theme.id != null){
-      //       this.form = response.data ;
-      //       this.theme = response.theme ;
-            
-      //       if(this.theme){
-      //         this.form.themeCode = response.theme.themeCode ;
-      //       }
-
-      //     }
-      //   })
-      // },
-      // uploadImg(data){
-      //   console.log('data = ' + data) ;
-      // } , 
-      // selectStyle(item){
-      //   this.form.loginStyle = item.id;  
-      //   console.log('item = ' + item.id) ;
-      // } ,
-      // copySuccess() {
-      //   this.$message.success("复制成功")
-      // },
-      // configTheme(){
-      //   this.$router.push('/business/theme/settings') ;
-      // },
-      // submitForm(formName) {
-      //   this.$refs[formName].validate((valid) => {
-      //     if (valid) {
-      //       this.loading = true ;
-      //       if (this.form.id != null) {
-      //         updateLoginSetting(this.form).then(response => {
-      //           this.msgSuccess("修改成功");
-      //           this.loading = false ;
-      //         });
-      //       } else {
-      //         addLoginSetting(this.form).then(response => {
-      //           this.msgSuccess("新增成功");
-      //           this.loading = false ;
-      //         });
-      //       }
-      //     }
-      //   });
-      // },
-      // resetForm() {
-      //   this.$refs["form"].resetFields();
-      //   this.getSetting();
-      // }
-    },
-  };
 </script>
 
 <style scoped lang="scss">

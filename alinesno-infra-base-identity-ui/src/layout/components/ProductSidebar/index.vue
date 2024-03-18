@@ -25,9 +25,10 @@ const menuItems = ref([
   {id:'2' , icon:'fa-brands fa-slack' , link:'/base/identity/application/index' , desc:'应用管理'},
   {id:'3' , icon:'fa-solid fa-list-check' , link:'/base/identity/online/index' , desc:'在线用户'},
   {id:'4' , icon:'fa-solid fa-at' , link:'/base/identity/account/index' , desc:'账户管理'},
-  {id:'5' , icon:'fa-regular fa-envelope-open' , link:'/base/identity/config/index' , desc:'认证配置'},
-  {id:'6' , icon:'fa-solid fa-file-word' , link:'/base/identity/security/index' , desc:'企业配置'}, 
+  {id:'5' , icon:'fa-regular fa-envelope-open' , link:'/base/identity/config/index' , desc:'登陆配置'},
+  {id:'6' , icon:'fa-solid fa-file-word' , link:'/base/identity/enterprise/index' , desc:'企业配置'}, 
   {id:'7' , icon:'fa-solid fa-user-shield' , link:'/base/identity/accountSync/index' , desc:'账户同步'}, 
+  {id:'8' , icon:'fa-solid fa-file-word' , link:'/base/identity/loginRecord/index' , desc:'登陆日志'}, 
 ]);
 
 // 打开服务市场

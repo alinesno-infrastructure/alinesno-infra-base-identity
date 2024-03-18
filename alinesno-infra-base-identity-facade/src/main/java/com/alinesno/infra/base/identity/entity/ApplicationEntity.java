@@ -41,82 +41,35 @@ public class ApplicationEntity extends InfraBaseEntity {
     private String applicationCode;
 
     /**
-     * 应用值
+     * 应用Logo
      */
-	@ColumnType(length=255)
-	@ColumnComment("应用值")
-	@TableField("token")
-    private String token;
+    @TableField("logo")
+    @ColumnType(length=255)
+    @ColumnComment("应用Logo")
+    private String logo;
 
     /**
-     * 最大文件长度
+     * 应用简介
      */
-    @TableField("max_file_size")
-	@ColumnType(length=4)
-	@ColumnComment("最大文件长度")
-    private Integer maxFileSize;
+    @TableField("intro")
+    @ColumnType(length=255)
+    @ColumnComment("应用简介")
+    private String intro;
 
     /**
-     * 文件类型
+     * 允许URL
      */
-    @TableField("file_type")
-	@ColumnType(length=20)
-	@ColumnComment("文件类型")
-    private String fileType;
+    @TableField("allow_url")
+    @ColumnType(length=255)
+    @ColumnComment("允许URL")
+    private String allowUrl;
 
     /**
-     * 接口密钥
+     * 是否公开
      */
-    @TableField("api_key")
-	@ColumnType(length=32)
-	@ColumnComment("接口密钥")
-    private String apiKey;
+    @TableField("is_public")
+    @ColumnType(length=1)
+    @ColumnComment("是否公开")
+    private Integer isPublic;
 
-    /**
-     * 最大上传次数
-     */
-    @TableField("max_upload_count")
-	@ColumnType(length=10)
-	@ColumnComment("最大上传次数")
-    private Integer maxUploadCount;
-
-    /**
-     * 最大下载次数
-     */
-    @TableField("max_download_count")
-	@ColumnType(length=10)
-	@ColumnComment("最大下载次数")
-    private Integer maxDownloadCount;
-
-    /**
-     * 应用logo标识
-     */
-	@ColumnType(length=255)
-	@ColumnComment("应用logo标识")
-	@TableField("banner")
-    private String banner;
-
-    /**
-     * 公司名称
-     */
-    @TableField("company_name")
-	@ColumnType(length=50)
-	@ColumnComment("公司名称")
-    private String companyName;
-
-    /**
-     * 所开通渠道
-     */
-    @TableField("channel_ids")
-	@ColumnType(length=255)
-	@ColumnComment("所开通渠道")
-    private String channelIds;
-
-    /**
-     * 应用码
-     */
-    @TableField("app_code")
-	@ColumnType(length=50)
-	@ColumnComment("应用码")
-    private String appCode;
 }

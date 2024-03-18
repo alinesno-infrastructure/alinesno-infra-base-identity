@@ -42,132 +42,65 @@ public class LoginRecordEntity extends InfraBaseEntity {
 	@ColumnType(length=19)
 	@ColumnComment("登陆时间")
 	private Date loginTime;
-	/**
-	 * 登陆IP
-	 */
-	@Excel(name = "登陆IP")
-	@TableField("login_ip")
+
+	@TableField("userId")
+	@ColumnType(length=11)
+	@ColumnComment("用户ID")
+	private Long userId;
+
+	@TableField("accToken")
+	@ColumnType(length=36)
+	@ColumnComment("访问令牌")
+	private String accToken;
+
+	@TableField("loginIp")
 	@ColumnType(length=15)
-	@ColumnComment("登陆IP")
+	@ColumnComment("登录IP")
 	private String loginIp;
-	/**
-	 * 登陆状态(1成功|0失败)
-	 */
-	@Excel(name = "登陆状态", replace = { "成功_1", "失败_0", "_null" })
-	@TableField("login_status")
-	@ColumnType(length=1)
-	@ColumnComment("登陆状态(1成功|0失败)")
-	private String loginStatus;
-	/**
-	 * 错误密码
-	 */
-	@Excel(name = "错误密码")
-	@TableField("error_password")
-	@ColumnType(length=255)
-	@ColumnComment("错误密码")
-	private String errorPassword;
-	/**
-	 * 手机验证码
-	 */
-	@Excel(name = "手机验证码")
-	@TableField("phone_code")
-	@ColumnType(length=4)
-	@ColumnComment("手机验证码")
-	private String phoneCode;
-	/**
-	 * 邮箱验证码
-	 */
-	@Excel(name = "邮箱验证码")
-	@TableField("email_code")
-	@ColumnType(length=6)
-	@ColumnComment("邮箱验证码")
-	private String emailCode;
-	/**
-	 * 登陆来源
-	 */
-	@Excel(name = "登陆来源")
-	@TableField("login_src")
-	@ColumnType(length=255)
-	@ColumnComment("登陆来源")
-	private String loginSrc;
-	/**
-	 * 退出时间
-	 */
-	@Excel(name = "退出时间", format = "yyyy-MM-dd HH:mm:ss")
-	@TableField("sign_out_time")
-	@ColumnType(length=8)
-	@ColumnComment("退出时间")
-	private Date signOutTime;
-	/**
-	 * 浏览器信息
-	 */
-	@Excel(name = "浏览器信息")
-	@TableField("login_browser")
-	@ColumnType(length=255)
-	@ColumnComment("浏览器信息")
-	private String loginBrowser;
-	/**
-	 * 登陆备注
-	 */
-	@Excel(name = "登陆备注")
-	@TableField("login_remark")
-	@ColumnType(length=255)
-	@ColumnComment("登陆备注")
-	private String loginRemark;
 
-	// 区域和城市信息
+	@TableField("loginAddress")
+	@ColumnType(length=50)
+	@ColumnComment("登录地址")
+	private String loginAddress;
 
-	@TableField("ip_info")
-	@ColumnType(length=255)
-	@ColumnComment("IP信息")
-	private String ipInfo; // 区域信息
-
-	@TableField("log_type")
-	@ColumnType(length=10)
-	@ColumnComment("日志类型")
-	private String logType; // 操作类型
-
-	@TableField("client_type")
-	@ColumnType(length=10)
-	@ColumnComment("客户端类型")
-	private String clientType; // 判断是PC/Desktop
-
-	@TableField("brower_type")
+	@TableField("loginDevice")
 	@ColumnType(length=20)
-	@ColumnComment("浏览器类型")
-	private String browerType; // 浏览器类型
+	@ColumnComment("登录设备")
+	private String loginDevice;
 
-	@TableField("tentant_domain")
-	@ColumnType(length=255)
-	@ColumnComment("tentantDomain")
-	private String tentantDomain ; // 租户域名
+	@TableField("loginSystem")
+	@ColumnType(length=20)
+	@ColumnComment("登录系统")
+	private String loginSystem;
 
-	@TableField
-	private String userId; // 用户id
+	@TableField("clientId")
+	@ColumnType(length=11)
+	@ColumnComment("客户端ID")
+	private Integer clientId;
 
-	@TableField
-	private String nickname; // 账号昵称
+	@TableField("clientDomain")
+	@ColumnType(length=100)
+	@ColumnComment("客户端域名")
+	private String clientDomain;
 
-	@TableField
-	private String avatar; // 头像
+	@TableField("sysUserUsername")
+	@ColumnType(length=20)
+	@ColumnComment("系统用户用户名")
+	private String sysUserUsername;
 
-	@TableField
-	private String token; // 本次登录Token
+	@TableField("sysUserAvatar")
+	@ColumnType(length=200)
+	@ColumnComment("系统用户头像")
+	private String sysUserAvatar;
 
-	@TableField
-	private String loginLocation; // 登录地
+	@TableField("sysClientName")
+	@ColumnType(length=50)
+	@ColumnComment("系统客户端名称")
+	private String sysClientName;
 
-	@TableField
-	private String clientInfo; // 登录客户端
-
-	@TableField
-	private String systemInfo; // 所属系统
-
-	@TableField
-	private String appInfo; // 所属应用
-
-	@TableField
-	private String authUrl; // 授权地址
-
+	@TableField("sysClientLogo")
+	@ColumnType(length=200)
+	@ColumnComment("系统客户端标识")
+	private String sysClientLogo;
 
 }

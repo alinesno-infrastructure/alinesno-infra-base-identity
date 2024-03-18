@@ -1,6 +1,6 @@
 <template>
    <div class="app-container">
-    <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+    <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick" type="card">
       <el-tab-pane label="接收推送" name="receive">
           <ReceivePush />
       </el-tab-pane>
