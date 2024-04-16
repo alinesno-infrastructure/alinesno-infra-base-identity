@@ -14,11 +14,11 @@
         class="demo-form"
       >
 
-        <el-form-item label="品牌代码" prop="themeCode">
-          <el-input type="input" show-word-limit v-model="form.themeCode" readonly placeholder="请输入主题代码">
-            <el-button slot="append" @click="configTheme()" icon="el-icon-edit">配置品牌</el-button>
-          </el-input>
-        </el-form-item>
+<!--        <el-form-item label="品牌代码" prop="themeCode">-->
+<!--          <el-input type="input" show-word-limit v-model="form.themeCode" readonly placeholder="请输入主题代码">-->
+<!--            <el-button slot="append" @click="configTheme()" icon="el-icon-edit">配置品牌</el-button>-->
+<!--          </el-input>-->
+<!--        </el-form-item>-->
 
         <el-form-item label="登录框版本选择" prop="loginStyle">
           <el-row>
@@ -63,11 +63,11 @@
           ></el-switch>
         </el-form-item>
 
-        <el-form-item label="默认首页" prop="defaultIndex">
-          <el-input type="input" maxlength="500" show-word-limit v-model="form.defaultIndex" placeholder="请输入默认首页"></el-input>
-        </el-form-item>
+<!--        <el-form-item label="默认首页" prop="defaultIndex">-->
+<!--          <el-input type="input" maxlength="500" show-word-limit v-model="form.defaultIndex" placeholder="请输入默认首页"></el-input>-->
+<!--        </el-form-item>-->
 
-        <el-form-item label="是否开启登陆验证码">
+        <el-form-item label="开启登陆验证码">
           <el-switch v-model="form.enableValidate"
             :active-value="1"
             :inactive-value="0"
@@ -124,9 +124,6 @@
         },
         // 表单参数
         rules: {
-          logoTitle: [
-            { required: true, message: "请输入登陆标题", trigger: "blur" },
-          ],
           logoTitle: [
             { required: true, message: "请输入登陆标题", trigger: "blur" },
           ],

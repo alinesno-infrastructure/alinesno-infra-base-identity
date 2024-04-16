@@ -26,9 +26,10 @@ const menuItems = ref([
   {id:'3' , icon:'fa-solid fa-list-check' , link:'/base/identity/online/index' , desc:'在线用户'},
   {id:'4' , icon:'fa-solid fa-at' , link:'/base/identity/account/index' , desc:'账户管理'},
   {id:'5' , icon:'fa-regular fa-envelope-open' , link:'/base/identity/config/index' , desc:'登陆配置'},
-  {id:'6' , icon:'fa-solid fa-file-word' , link:'/base/identity/enterprise/index' , desc:'企业配置'}, 
+  {id:'6' , icon:'fa-solid fa-screwdriver-wrench' , link:'/base/identity/enterprise/index' , desc:'企业配置'},
   {id:'7' , icon:'fa-solid fa-user-shield' , link:'/base/identity/accountSync/index' , desc:'账户同步'}, 
-  {id:'8' , icon:'fa-solid fa-file-word' , link:'/base/identity/loginRecord/index' , desc:'登陆日志'}, 
+  {id:'8' , icon:'fa-solid fa-computer' , link:'/base/identity/apiRecord/index' , desc:'操作日志'},
+  {id:'9' , icon:'fa-solid fa-file-word' , link:'/base/identity/loginRecord/index' , desc:'登陆日志'},
 ]);
 
 // 打开服务市场

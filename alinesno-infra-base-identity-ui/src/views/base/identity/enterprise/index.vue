@@ -11,20 +11,19 @@
         v-loading="loading"
         ref="form"
         label-width="180px"
-        class="demo-form"
-      >
+        class="demo-form">
 
-        <el-form-item label="品牌代码" prop="themeCode">
+        <el-form-item label="登陆提示信息" prop="themeCode">
           <el-input type="input" show-word-limit v-model="form.themeCode" readonly placeholder="请输入主题代码">
             <el-button slot="append" @click="configTheme()" icon="el-icon-edit">配置品牌</el-button>
           </el-input>
         </el-form-item>
 
-        <el-form-item label="登陆背景图片" prop="loginStyle">
+        <el-form-item label="登陆Logo" prop="loginStyle">
           <el-row>
-            <el-col :span="8" v-for="(o, index) in loginStyle" :key="index" :offset="index > 0 ? 1 : 0">
+            <el-col :span="17" v-for="(o, index) in loginStyle" :key="index" :offset="index > 0 ? 1 : 0">
 
-              <el-card :body-style="{ padding: '0px !important' }" :class="form.loginStyle == o.id?'select-card':''" shadow="never">
+              <el-card :body-style="{ padding: '0px !important' }" shadow="never">
                 <img :src="'http://data.linesno.com/icons/login/style-0'+(index+1)+'.png'" class="image">
                 <div style="padding: 14px;">
                   <span>{{ o.desc }}</span>
@@ -39,10 +38,10 @@
 
         <el-form-item label="登陆Banner" prop="loginStyle">
           <el-row>
-            <el-col :span="14" v-for="(o, index) in logoStyle" :key="index" :offset="index > 0 ? 1 : 0">
+            <el-col :span="17" v-for="(o, index) in loginStyle" :key="index" :offset="index > 0 ? 1 : 0">
 
-              <el-card :body-style="{ padding: '0px !important' }" :class="form.loginStyle == o.id?'select-card':''" shadow="never">
-                <img :src="'http://data.linesno.com/icons/login/style-0'+(index+3)+'.png'" class="image">
+              <el-card :body-style="{ padding: '0px !important' }" shadow="never">
+                <img :src="'http://data.linesno.com/icons/login/style-0'+(index+2)+'.png'" class="image">
                 <div style="padding: 14px;">
                   <span>{{ o.desc }}</span>
                   <div class="bottom clearfix">
@@ -54,35 +53,25 @@
           </el-row>
         </el-form-item>
 
-        <el-form-item label="登陆二维码" prop="defaultIndex">
-          <el-input type="input" maxlength="500" show-word-limit v-model="form.defaultIndex" placeholder="请输入默认首页"></el-input>
-        </el-form-item>
-
         <el-row>
-            <el-col :span="12">
+            <el-col :span="24">
                <el-form-item label="权限年份" prop="defaultIndex">
                   <el-input type="input" maxlength="500" show-word-limit v-model="form.defaultIndex" placeholder="权限年份"></el-input>
                </el-form-item>
             </el-col> 
-            <el-col :span="12">
+            <el-col :span="24">
                <el-form-item label="版权信息" prop="defaultIndex">
                   <el-input type="input" maxlength="500" show-word-limit v-model="form.defaultIndex" placeholder="版权信息"></el-input>
                </el-form-item>
             </el-col> 
         </el-row>
 
-        <el-form-item label="登陆提示信息" prop="themeCode">
-          <el-input type="input" show-word-limit v-model="form.themeCode" readonly placeholder="请输入主题代码">
-            <el-button slot="append" @click="configTheme()" icon="el-icon-edit">配置品牌</el-button>
-          </el-input>
-        </el-form-item>
-
-        <el-form-item label="登陆验证码">
-          <el-switch v-model="form.enableValidate"
-            :active-value="1"
-            :inactive-value="0"
-          ></el-switch>
-        </el-form-item>
+<!--        <el-form-item label="登陆验证码">-->
+<!--          <el-switch v-model="form.enableValidate"-->
+<!--            :active-value="1"-->
+<!--            :inactive-value="0"-->
+<!--          ></el-switch>-->
+<!--        </el-form-item>-->
 
         <br/>
 
@@ -117,8 +106,6 @@
       return {
         loginStyle:[
           {id:'1' , icon:'asserts/images/style-01.png' , desc:'经典版本的登陆UI，提供更加流畅的交互体验'} ,
-          {id:'2' , icon:'asserts/images/style-02.png' , desc:'简洁版的登陆，优化登录注册页面设计，PC视觉更简洁'} ,
-         //  {id:'3' , icon:'asserts/images/style-03.png' , desc:'平台版本的登陆界面，大气简洁的登陆界面，更贴近平台化'} ,
         ],
         logoStyle:[
           {id:'3' , icon:'asserts/images/style-03.png' , desc:'平台版本的登陆界面，大气简洁的登陆界面，更贴近平台化'} ,

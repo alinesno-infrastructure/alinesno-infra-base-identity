@@ -52,10 +52,10 @@ public class RegisteredAppEntity extends InfraBaseEntity {
      * 授权码回调地址
      */
     @Excel(name = "授权码回调地址")
-    @TableField("redirec_uri")
+    @TableField("allow_url")
     @ColumnType(length=255)
     @ColumnComment("授权码回调地址")
-    private String redirecUri;
+    private String allowUrl;
     /**
      * 是否自动授权
      */
